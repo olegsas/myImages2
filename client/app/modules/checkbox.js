@@ -51,7 +51,14 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
         $scope.openLightboxModal = function (index) {
             console.log("index=" + index);
             console.log("$scope.images[0]" + $scope.images[0].url);
-            //Lightbox.openModal($scope.images, index);
+            Lightbox.openModal(
+                [
+    {
+      'url': 'https://farm6.staticflickr.com/5830/20552523531_e1efec8d49_k.jpg',
+      'thumbUrl': 'https://farm6.staticflickr.com/5830/20552523531_ef720cd2f1_s.jpg',
+      'caption': 'This image has dimensions 2048x1519 and the img element is scaled to fit inside the window.'
+                }],0
+            );
         };
 
     }]);
