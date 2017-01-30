@@ -1,5 +1,6 @@
 angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
-    .controller('checkboxCtrl', ['$scope', '$http', function($scope, $http, Upload, Lightbox) {
+    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox) {
+       //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
 
@@ -61,6 +62,6 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
             );
         };
 
-    }]);
+    });
 
  
