@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/ng-image-gallery/dist/ng-image-gallery.min.css">
+    <link rel="stylesheet" href="node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css"> <!--we use it from the bootstrap gallery example-->
+    <link rel = "stylesheet" href = "css/styleLightboxPictures.css"> <!-- we copy this styles from the picture lightbox example-->
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/ng-image-gallery/dist/ng-image-gallery.min.js"></script>
+    <script src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script src="node_modules/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
+    <script src="app/app.js"></script>
+
+    <script src="app/modules/home.js"></script>
+    <script src="app/modules/profile.js"></script>
+    <script src="app/modules/auth.js"></script>
+    <script src = "app/modules/checkbox.js"></script>
+    <script src = "app/modules/example.js"></script>
+  </head>
+  <body ng-app="app" ng-controller="AppCtrl">
+
+      <div class="container navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
+                  ng-click="menuCollapsed = ! menuCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand">
+            Picture-IT!
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" collapse="isCollapsed">
+          <ul class="nav navbar-nav">
+            <li ui-sref-active="active">
+              <a href ui-sref="home">
+                <i class="fa fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a href ui-sref="profile">
+                Profile
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-if="!authenticated" ui-sref-active="active">
+              <a href ui-sref="login">
+                <i class="fa fa-home"></i>
+                Login
+              </a>
+            </li>
+            <li ng-if="!authenticated" ui-sref-active="active">
+              <a href ui-sref="register">
+                Register
+              </a>
+            </li>
+            <li ng-if="authenticated" ui-sref-active="active">
+              <a href ng-click="logout()">
+                <i class="fa fa-home"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div ui-view class="container slide"></div>
+  </body>
+</html>

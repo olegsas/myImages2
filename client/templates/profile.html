@@ -1,0 +1,60 @@
+<div ng-controller = "checkboxCtrl">
+    <h3>My name is {{name}}</h3>
+    <form name = "myForm">
+        <label>Change the public/private profile. Public:
+            <input type = "checkbox" ng-model = "public" ng-change = "update()">
+        </label><br/>
+        <tt>public = {{public}}</tt><br/>
+    </form>
+    <div class = "container">
+        <div class = "jumbotron row">
+            <h3>{{images.length}} картинки</h3>
+            <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
+                <a title = "Image" href = "#">
+                    <img class = "thumbnail img-responsive" width = "300px" height = "200px" ng-src = {{image.url}}>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- This code will be for the Bootstrap gallery with the modal windows 
+
+<div class="container">
+  <div class="row">
+    <h1>Bootstrap 3 Lightbox image gallery using Modal</h1>
+   
+    <div class="col-lg-3 col-sm-4 col-xs-6">
+        <a title="Image 1" href="#">
+            <img class="thumbnail img-responsive" src="http://placehold.it/600x350">
+        </a>
+    </div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/2255EE"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/449955/FFF"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 4" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/992233"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 5" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/2255EE"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 6" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/449955/FFF"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 8" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/777"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 9" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/992233"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 10" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/EEE"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 11" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/449955/FFF"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 12" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/DDD"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 13" href="#"><img class="thumbnail img-responsive" src="http://placehold.it/600x350/992233"></a></div>
+   
+    <hr>
+    
+    <hr>
+  </div>
+</div>
+
+<experiment with the ligtbox-->
+
+<ul class="gallery gallery1" ng-controller="GalleryCtrl">
+  <li ng-repeat="image in images">
+    <a ng-click="openLightboxModal($index)">
+      <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
+    </a>
+  </li>
+</ul>
+
