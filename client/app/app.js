@@ -7,7 +7,7 @@ angular.module('app', [
     'thatisuday.ng-image-gallery',
     'ngFileUpload',
     'app.checkbox',
-    'app.example'
+    'app.modalWindow'
 ])
 
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',

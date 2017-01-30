@@ -1,8 +1,8 @@
 
 
-angular.module('app.example', ['bootstrapLightbox']);
+angular.module('app.modalWindow', ['bootstrapLightbox']);
 
-angular.module('app.example').controller('GalleryCtrl', function ($scope, Lightbox) {
+angular.module('app.modalWindow').controller('GalleryCtrl', function ($scope, Lightbox) {
   $scope.images = [
     {
       'url': 'https://farm6.staticflickr.com/5830/20552523531_e1efec8d49_k.jpg',
