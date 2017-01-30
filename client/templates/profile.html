@@ -11,7 +11,9 @@
             <h3>{{images.length}} картинки</h3>
             <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
                 <a title = "Image" href = "#">
-                    <img class = "thumbnail img-responsive" width = "300px" height = "200px" ng-src = {{image.url}}>
+                    <a ng-click="openLightboxModal($index)">
+                        <img class = "thumbnail img-responsive" width = "300px" height = "200px" ng-src = {{image.url}}>
+                    </a>
                 </a>
             </div>
         </div>
@@ -20,11 +22,11 @@
 </div>
 
 
-<ul class="gallery gallery1" ng-controller="GalleryCtrl">
+<!--<ul class="gallery gallery1" ng-controller="GalleryCtrl">
   <li ng-repeat="image in images">
     <a ng-click="openLightboxModal($index)">
       <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
     </a>
   </li>
 </ul>
-
+-->

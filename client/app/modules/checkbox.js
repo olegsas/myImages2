@@ -1,5 +1,5 @@
-angular.module('app.checkbox', ['ngFileUpload'])
-    .controller('checkboxCtrl', ['$scope', '$http', function($scope, $http, Upload) {
+angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
+    .controller('checkboxCtrl', ['$scope', '$http', function($scope, $http, Upload, Lightbox) {
         $scope.methods = {};
     $scope.images = [];
 
@@ -45,7 +45,14 @@ angular.module('app.checkbox', ['ngFileUpload'])
              $scope.public = public.data.public;
          })          
          
-     };
+        };
+
+        // we use this function from the example
+        $scope.openLightboxModal = function (index) {
+            console.log("index=" + index);
+            console.log("$scope.images[0]" + $scope.images[0].url);
+            //Lightbox.openModal($scope.images, index);
+        };
 
     }]);
 
