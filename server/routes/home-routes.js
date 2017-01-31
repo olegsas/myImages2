@@ -9,7 +9,8 @@ const cloudinary = require('../services/cloudinary-service');
 module.exports = function (app) {
     app.get('/images', getImages);
     app.post('/image', multipartyMiddleware, cloudinary.uploadImage);
-    app.delete('/image/:id', deleteImage);
+    // app.delete('/image/:id', deleteImage);
+   app.delete('/image/:id', deleteImage); 
 }
 
 function getImages(request, response) {
@@ -22,6 +23,8 @@ function getImages(request, response) {
 
 function deleteImage (request, response) {
     const id = request.params.id;
+    console.log(id);
+    cloudinary.deleteImageCloud();
 
     Image.find({_id: id}).remove((err, result) => {
         if (err)
