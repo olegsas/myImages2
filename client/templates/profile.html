@@ -10,13 +10,14 @@
         <div class = "jumbotron row">
             <h3>{{images.length}} картинки</h3>
             <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
-                <button class = "close myPictureClose" ng-click = "deletePicture($index)">x</button>
+                <button class = "close myPictureClose" ng-click = "deletePicture(image, $index)">x</button>
                 <!--class myPictureClose I add to customize position of the button-->
                 <a title = "Image" href = "#">
                     <a ng-click="openLightboxModal($index)">
                         <img class = "thumbnail img-responsive" width = "300px" height = "200px" ng-src = {{image.url}}>
                     </a>
                 </a>
+                <button ng-click="openModal(image.url)">hello modal</button>
             </div>
         </div>
     </div>

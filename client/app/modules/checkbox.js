@@ -1,5 +1,5 @@
 angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
-    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox) {
+    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal) {
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
@@ -14,11 +14,18 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
         }
     });
 
+    $scope.openModal = function (img) {
+        var modalInstance = $uibModal.open({
+            template : `<img ng-src="`+ img +`"></img>`
+        })
+
+    }
     $http.get('/images')
         .then(images => {
-            images.data.forEach(img => {
-                $scope.images.push({url: img})
-            })
+            $scope.images = images.data;
+            // images.data.forEach(img => {
+            //     $scope.images.push({url: img})
+            // })
         })
         .catch(err => console.log(err))
 // I borrowed the code above the line from the controller home.js
@@ -50,13 +57,17 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
 
         // we use this function from the example
         $scope.openLightboxModal = function (index) {
-            console.log("index=" + index);
-            console.log("$scope.images[0]" + $scope.images[0].url);
-            Lightbox.openModal($scope.images, index);
+            var obj = Lightbox.openModal($scope.images, index)
+            console.log(obj)
         };
 
-        $scope.deletePicture = function(index){
-            console.log(index);
+        $scope.deletePicture = function(image, index){
+            console.log(image)
+            $http.delete('/image/' + image._id)
+                .then(res => {
+                    $scope.images.splice(index, 1)
+                })
+                .catch(err => {})
         };
 
     });
