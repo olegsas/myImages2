@@ -55,8 +55,8 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
             Lightbox.openModal($scope.images, index);
         };
 
-        $scope.deletePicture = function(){
-            console.log("Delete it");
+        $scope.deletePicture = function(index){
+            console.log(index);
         };
 
     });

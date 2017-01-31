@@ -10,7 +10,7 @@
         <div class = "jumbotron row">
             <h3>{{images.length}} картинки</h3>
             <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
-                <button class = "close myPictureClose" ng-click = "deletePicture()">x</button>
+                <button class = "close myPictureClose" ng-click = "deletePicture($index)">x</button>
                 <!--class myPictureClose I add to customize position of the button-->
                 <a title = "Image" href = "#">
                     <a ng-click="openLightboxModal($index)">
