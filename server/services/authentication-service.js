@@ -69,8 +69,8 @@ module.exports.getUserProfile = function(req, res){
 		}
 		if(result){
 			//res.send({public:result});
-			console.log("server ansver" + result);
-			console.log(result.public);
+			// console.log("server ansver" + result);
+			// console.log(result.public);
 			res.send({public: result.public}); // for the debug only
 		}
 	})
@@ -101,8 +101,8 @@ module.exports.getUserName = function(req, res){
 		}
 		if(result){
 			//res.send({public:result});
-			console.log("server ansver" + result);
-			console.log(result.local.name);
+			// console.log("server ansver" + result);
+			// console.log(result.local.name);
 			res.send({name: result.local.name});
 		}
 	})

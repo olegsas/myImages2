@@ -22,6 +22,8 @@ function getImages(request, response) {
 
 function deleteImage (request, response) {
     const id = request.params.id;
+    console.log(id); 
+    cloudinary.deleteImageCloud();
 
     Image.find({_id: id}).remove((err, result) => {
         if (err)

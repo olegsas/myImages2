@@ -28,5 +28,22 @@ module.exports = {
         } else {
             next();
         }
+    },
+
+    deleteImageCloud: function (req, res, next) { 
+        console.log("delete image!"); 
+        if (req.files.image) { 
+            console.log("Destroy image"); 
+            cloudinary.uploader.destroy(req.files.image.path, function (result) { 
+                if (result.url) { 
+                    // req.imageLink = result.url; 
+ 
+                } else { 
+                    res.json(error); 
+                } 
+            }); 
+        } else { 
+            next(); 
+        } 
     }
 };
