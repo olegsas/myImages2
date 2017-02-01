@@ -80,8 +80,8 @@ function deleteImage (request, response) {
         }
         if(result){
             console.log("server answer - " + result);
-            console.log("result url = " + result.url);
-            cloudinary.uploader.destroy(result.url, function (result) {console.log(result) });
+            console.log("result public_id = " + result.public_id);
+            cloudinary.uploader.destroy(result.public_id, function (result) {console.log(result) });
         }
     });
     //console.log("imgMonga.url" + imgMonga.url);
