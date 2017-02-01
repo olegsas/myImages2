@@ -1,14 +1,43 @@
 const mongoose = require('mongoose');
 const Image = mongoose.model('Image');
+const cloudinary = require('cloudinary');// for the debug
+
 
 const multiparty = require('connect-multiparty'),
 multipartyMiddleware = multiparty()
 
-const cloudinary = require('../services/cloudinary-service');
+// const cloudinary = require('../services/cloudinary-service'); for the debug
+
+cloudinary.config({// debug
+    cloud_name: 'do5zrocew',// debug
+    api_key: '176984263871615',//debug
+    api_secret: '-4H2VvXsGsXn3O8zPU1HenjCZm8'//debug
+});//debug
+
+function uploadImage(req, res, next) {// all function for debug
+        console.log("Upload req.files=" + req.files);
+        if (req.files.image) {
+            cloudinary.uploader.upload(req.files.image.path, function (result) {
+                if (result.url) {
+                    // req.imageLink = result.url;
+                    var image = new Image();
+                    image.url = result.url;
+                    image._owner = req.session._id;
+                    image.save((err, response) => {
+                        res.status(201).json(result.url)
+                    })
+                } else {
+                    res.json(error);
+                }
+            });
+        } else {
+            next();
+        }
+    };
 
 module.exports = function (app) {
     app.get('/images', getImages);
-    app.post('/image', multipartyMiddleware, cloudinary.uploadImage);
+    app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
 }
 
