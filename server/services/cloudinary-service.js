@@ -11,6 +11,7 @@ cloudinary.config({
 module.exports = {
 
     uploadImage: function (req, res, next) {
+        console.log("Upload req.files=" + req.files);
         if (req.files.image) {
             cloudinary.uploader.upload(req.files.image.path, function (result) {
                 if (result.url) {
@@ -32,18 +33,19 @@ module.exports = {
 
     deleteImageCloud: function (req, res, next) { 
         console.log("delete image!"); 
-        if (req.files.image) { 
-            console.log("Destroy image"); 
-            cloudinary.uploader.destroy(req.files.image.path, function (result) { 
-                if (result.url) { 
-                    // req.imageLink = result.url; 
+        console.log("Delete req.files=" + req.files);
+        // if (req.files.image) { 
+        //     console.log("Destroy image"); 
+        //     cloudinary.uploader.destroy(req.files.image.path, function (result) { 
+        //         if (result.url) { 
+        //             // req.imageLink = result.url; 
  
-                } else { 
-                    res.json(error); 
-                } 
-            }); 
-        } else { 
-            next(); 
-        } 
+        //         } else { 
+        //             res.json(error); 
+        //         } 
+        //     }); 
+        // } else { 
+        //     next(); 
+        // } 
     }
 };
