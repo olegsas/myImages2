@@ -57,12 +57,12 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
 
         // we use this function from the example
         $scope.openLightboxModal = function (index) {
-            var obj = Lightbox.openModal($scope.images, index)
-            console.log(obj)
+            // var obj = Lightbox.openModal($scope.images, index)
+            // console.log(obj)
         };
 
         $scope.deletePicture = function(image, index){
-            console.log(image)
+            // console.log(image)
             $http.delete('/image/' + image._id)
                 .then(res => {
                     $scope.images.splice(index, 1)
