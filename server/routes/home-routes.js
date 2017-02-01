@@ -36,23 +36,6 @@ function uploadImage(req, res, next) {// all function for debug
         }
     };
 
-    function deleteImageCloud (/*req, res, next*/) { 
-        console.log("delete image!"); 
-        //console.log("Delete req.files=" + req.files);
-        // if (req.files.image) { 
-        //     console.log("Destroy image"); 
-           cloudinary.uploader.destroy('srt7i46zjfqbsnvb4pqx', function (result) {console.log(result) });
-        //         if (result.url) { 
-        //             // req.imageLink = result.url; 
- 
-        //         } else { 
-        //             res.json(error); 
-        //         } 
-        //     }); 
-        // } else { 
-        //     next(); 
-        // } 
-    };
 
 module.exports = function (app) {
     app.get('/images', getImages);
@@ -85,6 +68,12 @@ function deleteImage (request, response) {
                 console.log(resultCloud) 
                 if(resultCloud){
                     /// ok we can delete from monga
+                    Image.find({_id: id}).remove((err, result) => {
+                        if (err)
+                            response.status(500).json(err)
+                        else
+                            response.status(200).json({message: 'OK'})
+                    });
                 } else {
                     sendJSONresponse(res, 404, err);
                     return;
@@ -92,13 +81,4 @@ function deleteImage (request, response) {
             });
         };
     });
-    //console.log("imgMonga.url" + imgMonga.url);
-    //deleteImageCloud();
-
-    // Image.find({_id: id}).remove((err, result) => {
-    //     if (err)
-    //         response.status(500).json(err)
-    //     else 
-    // response.status(200).json({message : 'ok'})
-    // })
 };
