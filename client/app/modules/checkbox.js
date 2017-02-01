@@ -62,12 +62,15 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
         };
 
         $scope.deletePicture = function(image, index){
-            // console.log(image)
-            $http.delete('/image/' + image._id)
-                .then(res => {
-                    $scope.images.splice(index, 1)
-                })
-                .catch(err => {})
+            console.log(image);
+            console.log("start");
+            body.css('cursor', 'waiting');
+            // $http.delete('/image/' + image._id)
+            //     .then(res => {
+            //         $scope.images.splice(index, 1)
+            //     })
+            //     .catch(err => {});
+            console.log("finish");
         };
 
     });
