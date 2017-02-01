@@ -35,6 +35,24 @@ function uploadImage(req, res, next) {// all function for debug
         }
     };
 
+    function deleteImageCloud (/*req, res, next*/) { 
+        console.log("delete image!"); 
+        //console.log("Delete req.files=" + req.files);
+        // if (req.files.image) { 
+        //     console.log("Destroy image"); 
+           cloudinary.uploader.destroy('srt7i46zjfqbsnvb4pqx', function (result) {console.log(result) });
+        //         if (result.url) { 
+        //             // req.imageLink = result.url; 
+ 
+        //         } else { 
+        //             res.json(error); 
+        //         } 
+        //     }); 
+        // } else { 
+        //     next(); 
+        // } 
+    };
+
 module.exports = function (app) {
     app.get('/images', getImages);
     app.post('/image', multipartyMiddleware, uploadImage);
@@ -52,7 +70,9 @@ function getImages(request, response) {
 function deleteImage (request, response) {
     const id = request.params.id;
     console.log(id); 
-    cloudinary.deleteImageCloud();
+    var imgMonga = Image.find({_id: id});
+    //console.log("imgMonga.url" + imgMonga.url);
+    deleteImageCloud();
 
     Image.find({_id: id}).remove((err, result) => {
         if (err)
