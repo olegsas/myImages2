@@ -81,8 +81,16 @@ function deleteImage (request, response) {
         if(result){
             console.log("server answer - " + result);
             console.log("result public_id = " + result.public_id);
-            cloudinary.uploader.destroy(result.public_id, function (result) {console.log(result) });
-        }
+            cloudinary.uploader.destroy(result.public_id, function (resultCloud) {
+                console.log(resultCloud) 
+                if(resultCloud){
+                    /// ok we can delete from monga
+                } else {
+                    sendJSONresponse(res, 404, err);
+                    return;
+                }
+            });
+        };
     });
     //console.log("imgMonga.url" + imgMonga.url);
     //deleteImageCloud();
@@ -93,4 +101,4 @@ function deleteImage (request, response) {
     //     else 
     // response.status(200).json({message : 'ok'})
     // })
-}
+};
