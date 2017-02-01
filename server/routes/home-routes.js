@@ -23,6 +23,7 @@ function uploadImage(req, res, next) {// all function for debug
                     var image = new Image();
                     image.url = result.url;
                     image._owner = req.session._id;
+                    image.public_id = result.public_id;
                     image.save((err, response) => {
                         res.status(201).json(result.url)
                     })
@@ -69,15 +70,27 @@ function getImages(request, response) {
 
 function deleteImage (request, response) {
     const id = request.params.id;
-    console.log(id); 
-    var imgMonga = Image.find({_id: id});
+    console.log("id===" + id); 
+    Image.findOne({_id: id}, function(err, result){
+        console.log("go!!");
+        if(err){
+            console.log("err find");
+            sendJSONresponse(res, 404, err);
+            return;
+        }
+        if(result){
+            console.log("server answer - " + result);
+            console.log("result url = " + result.url);
+            cloudinary.uploader.destroy(result.url, function (result) {console.log(result) });
+        }
+    });
     //console.log("imgMonga.url" + imgMonga.url);
-    deleteImageCloud();
+    //deleteImageCloud();
 
-    Image.find({_id: id}).remove((err, result) => {
-        if (err)
-            response.status(500).json(err)
-        else 
-    response.status(200).json({message : 'ok'})
-    })
+    // Image.find({_id: id}).remove((err, result) => {
+    //     if (err)
+    //         response.status(500).json(err)
+    //     else 
+    // response.status(200).json({message : 'ok'})
+    // })
 }
