@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Image = mongoose.model('Image');
+const User = mongoose.model('User');
 const cloudinary = require('cloudinary');// for the debug
 
 
@@ -41,6 +42,7 @@ module.exports = function (app) {
     app.get('/images', getImages);
     app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
+    app.get('/users', getUsers);
 }
 
 function getImages(request, response) {
@@ -82,3 +84,12 @@ function deleteImage (request, response) {
         };
     });
 };
+
+function getUsers (request, response) {
+    const users = [];
+    User.find({}, function (err, docs) {
+        console.log("docs = " + docs);
+        response.status(200);
+    })
+
+}

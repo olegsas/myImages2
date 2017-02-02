@@ -3,7 +3,7 @@ angular.module('app.home', ['ngFileUpload'])
 .controller('homeCtrl', function($scope, $http, Upload ) {
     $scope.methods = {};
     $scope.images = [];
-    $scope.users = [];
+    $scope.users = ['user1', 'user2', 'user3'];
 
     
 
