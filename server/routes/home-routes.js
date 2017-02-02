@@ -89,7 +89,10 @@ function getUsers (request, response) {
     const users = [];
     User.find({}, function (err, docs) {
         console.log("docs = " + docs);
-        response.status(200);
+        console.log("docs local name = " + docs[0].local.name);
+        users.push(docs[0].local.name);
+        console.log("after push = " + users[0]);
+        response.status(200).json(users);
     })
 
 }

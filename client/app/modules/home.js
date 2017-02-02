@@ -17,9 +17,10 @@ angular.module('app.home', ['ngFileUpload'])
 
     $http.get('/users')
         .then(users => {
+            console.log("We get users==============================");
             users.data.forEach(users => {
                 $scope.users.push({data: users})
-            })
+            });
         })
         .catch(err => console.log(err))
 });
