@@ -58,7 +58,7 @@ function deleteImage (request, response) {
         console.log("go!!");
         if(err){
             console.log("err find");
-            sendJSONresponse(res, 404, err);
+            res.json(err);
             return;
         }
         if(result){
@@ -75,7 +75,7 @@ function deleteImage (request, response) {
                             response.status(200).json({message: 'OK'})
                     });
                 } else {
-                    sendJSONresponse(res, 404, err);
+                    res.json(err);
                     return;
                 }
             });
