@@ -10,10 +10,12 @@ angular.module('app.home', ['ngFileUpload'])
             angular.element(body).css('cursor', 'progress');
             Upload.upload({ url: '/image', data: { image: $scope.file } })
                 .then(res => {
-                    if (res.status = 200)
-                        $scope.images.push({url: res.data})
+                    if (res.status = 200) {
+                        $scope.images.push({url: res.data});
+                        angular.element(body).css('cursor', 'default');
+                    }
                 });
-            angular.element(body).css('cursor', 'default');
+            //angular.element(body).css('cursor', 'default');
         }
     });
 
