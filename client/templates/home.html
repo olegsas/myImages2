@@ -1,22 +1,3 @@
-<!--<ng-image-gallery
-    ng-if="images.length > 0"
-    images="images"
-    thumbnails="true"
-    inline="true"
-    img-bubbles="true"
-    bg-close="true"
-    bubbles="true"
-    img-anim="slide"
-    conf="conf"
-    on-open="opened();"
-    on-close="closed();"
-></ng-image-gallery>-->
 
 <h2>{{images.length}} картинки</h2>
 
-<div style="margin-top: 20px" class="container">
-    <div ngf-drop ngf-select ng-model="file" class="drop-box" 
-        ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
-        accept="image/*" 
-        ngf-pattern="'image/*'">Drop images here or click to upload</div>
-</div>
