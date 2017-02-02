@@ -3,21 +3,9 @@ angular.module('app.home', ['ngFileUpload'])
 .controller('homeCtrl', function($scope, $http, Upload ) {
     $scope.methods = {};
     $scope.images = [];
+    $scope.users = ['user1', 'user2', 'user3'];
 
-    $scope.$watch('file', function () {
-        if ($scope.file != null) {
-            var body = document.querySelector('body');// we find the body selector
-            angular.element(body).css('cursor', 'progress');
-            Upload.upload({ url: '/image', data: { image: $scope.file } })
-                .then(res => {
-                    if (res.status = 200) {
-                        $scope.images.push({url: res.data});
-                        angular.element(body).css('cursor', 'default');
-                    }
-                });
-            //angular.element(body).css('cursor', 'default');
-        }
-    });
+    
 
     $http.get('/images')
         .then(images => {
@@ -25,5 +13,14 @@ angular.module('app.home', ['ngFileUpload'])
                 $scope.images.push({url: img})
             })
         })
+        .catch(err => console.log(err));
+
+    $http.get('/users')
+        .then(users => {
+            console.log("We get users==============================");
+            users.data.forEach(users => {
+                $scope.users.push({data: users})
+            });
+        })
         .catch(err => console.log(err))
-})
+});
