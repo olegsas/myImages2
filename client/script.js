@@ -18,33 +18,9 @@ angular
       $stateProvider
         .state('home', {
             url: 'home/:foo?bar',
-            templateUrl: 'tpl.home.html',
+            templateUrl: 'template.html',
             controller: 'MainRootCtrl'
         });
-        
-
-      $stateProvider
-        .state('other', {
-          url: '/other/:foo?bar',
-          params: { 
-            // here we define default value for foo
-            // we also set squash to false, to force injecting
-            // even the default value into url
-            foo: {
-              value: 'defaultValue',
-              squash: false,
-            },
-            // this parameter is now array
-            // we can pass more items, and expect them as []
-            bar : { 
-              array : true,
-            },
-            // this param is not part of url
-            // it could be passed with $state.go or ui-sref 
-            hiddenParam: 'YES',
-          },
-          templateUrl: 'tpl.html',
-        })
 
       $urlRouterProvider.otherwise('/');
     }
