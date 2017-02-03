@@ -3,7 +3,9 @@
 
 <ul ng-repeat = "user in users">
     <li>
-        <a href = "#/users" ui-sref = "users">{{user.local.name}}</a>
+        <a href = "#/users" ui-sref = "users({ name: 'name1' })">{{user.local.name}}</a>
+
+        <!--I try to use name of user like name1-->
     </li>
 </ul>
 
