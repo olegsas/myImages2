@@ -62,6 +62,7 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
 
         // we use this function from the example
         $scope.openLightboxModal = function (index) {
+            Lightbox.openModal($scope.images, index);
             // var obj = Lightbox.openModal($scope.images, index)
             // console.log(obj)
         };
