@@ -31,7 +31,7 @@ angular.module('app', [
                 url: '/home',
                 templateUrl: 'templates/home.html',
                 controller: 'homeCtrl',
-                authenticate: true
+                authenticate: false
             })
             .state('profile', {
                 url: '/profile',
@@ -54,7 +54,7 @@ angular.module('app', [
             .state('users', {
                 url: '/users',
                 templateUrl: 'templates/users.html',
-                controller: 'homeCtrl',
+                controller: 'checkboxCtrl',
                 authenticate: false
             })
 
