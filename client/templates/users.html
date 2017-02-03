@@ -1,16 +1,22 @@
-<div ng-controller = "checkboxCtrl">
+<div ng-controller = "homeCtrl">
     <h3>My name is {{name}}</h3>
-    <form name = "myForm">
+    <!--<form name = "myForm">
         <label>Change the public/private profile. Public:
             <input type = "checkbox" ng-model = "public" ng-change = "update()">
         </label><br/>
         <tt>public = {{public}}</tt><br/>
-    </form>
+    </form>-->
+    <!---->
+    <!--if admin we can change the public/private profile-->
+    <!---->
     <div class = "container">
         <div class = "jumbotron row">
             <h3>{{images.length}} картинки</h3>
             <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
-                <button class = "close myPictureClose" ng-click = "deletePicture(image, $index)">x</button>
+                <!---->
+                <!--<button class = "close myPictureClose" ng-click = "deletePicture(image, $index)">x</button>-->
+                <!--if admin can delete the picture-->
+                <!---->
                 <!--class myPictureClose I add to customize position of the button-->
                 <a title = "Image" href = "#">
                     <a ng-click="openLightboxModal($index)">
@@ -22,13 +28,16 @@
         </div>
     </div>
 
-    <div style="margin-top: 20px" class="container">
+    <!--<div style="margin-top: 20px" class="container">
         <div ngf-drop ngf-select ng-model="file" class="drop-box" 
             ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
             accept="image/*" 
             ngf-pattern="'image/*'">
                 Drop images here or click to upload
         </div>
-    </div>
+    </div>-->
+    <!---->
+    <!--if admin can add pictures to the user-->
+    <!---->
 
 </div>

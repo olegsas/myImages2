@@ -51,6 +51,12 @@ angular.module('app', [
                 controller: 'authCtrl',
                 authenticate: false
             })
+            .state('users', {
+                url: '/users',
+                templateUrl: 'templates/users.html',
+                controller: 'homeCtrl',
+                authenticate: false
+            })
 
     }
 ])

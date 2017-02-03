@@ -1,7 +1,11 @@
 
 <h2>All users</h2>
 
-<h3 ng-repeat = "user in users">{{user.local.name}}</h3>
+<ul ng-repeat = "user in users">
+    <li>
+        <a href = "#/users" ui-sref = "users">{{user.local.name}}</a>
+    </li>
+</ul>
 
 
 
