@@ -3,7 +3,7 @@ angular.module('app.home', ['ngFileUpload'])
 .controller('homeCtrl', function($scope, $http, Upload ) {
     $scope.methods = {};
     $scope.images = [];
-    $scope.users = ['user1', 'user2', 'user3'];
+    $scope.users = [];
 
     
 
@@ -19,7 +19,7 @@ angular.module('app.home', ['ngFileUpload'])
         .then(users => {
             console.log("We get users==============================");
             users.data.forEach(users => {
-                $scope.users.push({data: users})
+                $scope.users.push(users)
             });
         })
         .catch(err => console.log(err))

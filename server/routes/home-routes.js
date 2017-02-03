@@ -88,10 +88,13 @@ function deleteImage (request, response) {
 function getUsers (request, response) {
     const users = [];
     User.find({}, function (err, docs) {
-        console.log("docs = " + docs);
-        console.log("docs local name = " + docs[0].local.name);
-        users.push(docs[0].local.name);
-        console.log("after push = " + users[0]);
+        // console.log("docs = " + docs);
+        // console.log("docs local name = " + docs[1].local.name);
+        // docs.forEach(e => console.log("e= " + e.local.name));
+        docs.forEach(e => users.push(e));
+        // users.push(docs[0].local.name);
+        // users.push(docs[1].local.name);
+        // console.log("after push = " + users[0]);
         response.status(200).json(users);
     })
 
