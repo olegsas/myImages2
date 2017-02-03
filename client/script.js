@@ -17,7 +17,7 @@ angular
         
       $stateProvider
         .state('home', {
-          url: '/:foo?bar',
+          url: 'home/:foo?bar',
           views: {
             '': {
               templateUrl: 'tpl.home.html',

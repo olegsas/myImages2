@@ -24,20 +24,12 @@
       <li><a ui-sref="home({foo: 'fooVal2', bar: 'barVal2'})">home({foo: 'fooVal2', bar: 'barVal2'})</a>
     </ul>
     
-    <h3>params : {}</h3>
-    <ul>
-      <li>bar is array</li>
-      <li><a href="#/other/fooVal?bar=1&amp;bar=2">#/other/fooVal?bar=1&amp;bar=2</a></li>
-      <li>foo param is default</li>
-      <li><a ui-sref="other({bar: [4,5]})">other({bar: [4,5]})</a> 
-    </ul>
-  
     <div ui-view=""></div>
     
     
-<script type="text/ng-template" id="tpl.html"> 
+<!--<script type="text/ng-template" id="tpl.html"> 
  <div ui-view>
-  <h3>current state name: <var>{{$state.current.name}}</var></h3>
+  <h3 style = "color: red" >current state name: <var>{{$state.current.name}}</var></h3>
   
   
   <h5>params</h5>
@@ -46,7 +38,7 @@
   <pre>{{$state.current | json}}</pre>
   
  </div>
-</script>
+</script>-->
  
   </body> 
 
