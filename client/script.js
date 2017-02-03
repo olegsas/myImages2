@@ -17,25 +17,9 @@ angular
         
       $stateProvider
         .state('home', {
-          url: 'home/:foo?bar',
-          views: {
-            '': {
-              templateUrl: 'tpl.home.html',
-              controller: 'MainRootCtrl'
-
-            },
-
-            'A@home': {
-              templateUrl: 'tpl.a.html',
-              //controller: 'MainCtrl'
-            },
-
-            'B@home': {
-              templateUrl: 'tpl.b.html',
-              //controller: 'SomeController'
-            }
-          }
-
+            url: 'home/:foo?bar',
+            templateUrl: 'tpl.home.html',
+            controller: 'MainRootCtrl'
         });
         
 
