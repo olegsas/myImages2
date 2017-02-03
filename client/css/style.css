@@ -6,3 +6,9 @@
     top: 5px;
     right: 25px;
 }
+
+.vcenter { /* this style is for align images inside the profile board*/
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
