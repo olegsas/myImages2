@@ -44,6 +44,7 @@ module.exports = function (app) {
     app.delete('/image/:id', deleteImage);
     app.get('/users', getUsers);
     app.get('/users/:id', getPicturesForUser);
+    app.get('/getUsernameForId/:id', getUsernameForId);
 }
 
 function getImages(request, response) {
@@ -53,6 +54,14 @@ function getImages(request, response) {
         response.status(200).json(images)
     })
 };
+
+function getUsernameForId(request, response) {
+    const id = request.params.id;// id for our user
+    User.findOne({'_id': id}, function (err, doc) {
+        const name = doc.local.name;
+        response.status(200).json({name: name});
+    })
+}
 
 function getPicturesForUser(request, response) {
     // request.params.id - id of our user!!! this is name1 if users/name1

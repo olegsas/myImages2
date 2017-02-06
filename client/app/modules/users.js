@@ -38,6 +38,14 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         .catch(err => console.log(err));
 // I borrowed the code above the line from the controller home.js
         
+        $http.get('/getUsernameForId/'+$scope.stateUser_id)
+            .then(nameForId => {    
+                //debugger;
+                $scope.nameForId = nameForId.data.name;
+                console.log("NNName for Id = " + $scope.nameForId);
+            });
+        // we need to find username for this _id
+
         $http.get('/getUserName')
         .then(name => {
             //
@@ -56,6 +64,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         $http.get('/users/' + $scope.stateUser_id)
         .then(imagesForUsers => {
             $scope.imagesForUsers = imagesForUsers.data;//null;//images.data;
+            // we want to know username for this id of the user
+            
 
         });
         // question! How can we know that we have images for the certain user?
