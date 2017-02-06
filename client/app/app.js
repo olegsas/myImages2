@@ -12,6 +12,9 @@ angular.module('app', [
 
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',
     function ($rootScope, $state, $stateParams, AuthService) {
+        var username = $stateParams.user; // getting username
+        console.log($stateParams);
+        console.log("username = " + username);
         $rootScope.$on("$stateChangeStart", async function (event, toState, toParams, fromState, fromParams) {
             if (toState.authenticate && !AuthService.isAuthenticated()) {
                 // User isn’t authenticated
@@ -52,7 +55,7 @@ angular.module('app', [
                 authenticate: false
             })
             .state('users', {
-                url: '/users',
+                url: '/users/{username}',
                 templateUrl: 'templates/users.html',
                 controller: 'checkboxCtrl',
                 authenticate: false
