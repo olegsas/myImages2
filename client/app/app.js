@@ -7,7 +7,8 @@ angular.module('app', [
     'thatisuday.ng-image-gallery',
     'ngFileUpload',
     'app.checkbox',
-    'app.modalWindow'
+    'app.modalWindow',
+    'app.users'
 ])
 
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',
@@ -57,7 +58,7 @@ angular.module('app', [
             .state('users', {
                 url: '/users/{username}',
                 templateUrl: 'templates/users.html',
-                controller: 'checkboxCtrl',
+                controller: 'usersCtrl',
                 authenticate: false
             })
 
