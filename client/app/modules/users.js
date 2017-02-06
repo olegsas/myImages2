@@ -5,6 +5,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
+    $scope.imagesForUsers = [];
 
     $scope.$watch('file', function () {
         if ($scope.file != null) {
@@ -53,8 +54,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         // we get all the pictures for the user/username
         // we have stateUsername!
         $http.get('/users/' + $scope.stateUser_id)
-        .then(images => {
-            $scope.images = null;//images.data;
+        .then(imagesForUsers => {
+            $scope.imagesForUsers = imagesForUsers.data;//null;//images.data;
 
         });
         // question! How can we know that we have images for the certain user?
