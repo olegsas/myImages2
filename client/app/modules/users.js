@@ -52,7 +52,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
 
         // we get all the pictures for the user/username
         // we have stateUsername!
-        $http.get('/users/' + $scope.stateUsername)
+        $http.get('/users/' + $scope.stateUser_id)
         .then(images => {
             $scope.images = null;//images.data;
 
