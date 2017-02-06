@@ -58,7 +58,8 @@ function getPicturesForUser(request, response) {
     // request.params.id - id of our user!!! this is name1 if users/name1
     const id = request.params.id // name of our user
     console.log("name" + id);
-    console.log("###");
+    const imagesForUser = [];
+    //Image.find({'_owner': })
 }
 
 function deleteImage (request, response) {
