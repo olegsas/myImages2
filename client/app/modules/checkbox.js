@@ -73,6 +73,7 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
             console.log("start");
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
+            console.log("image.id = " + image._id);
             $http.delete('/image/' + image._id)
                 .then(res => {
                     $scope.images.splice(index, 1);

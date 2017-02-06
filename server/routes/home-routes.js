@@ -43,6 +43,7 @@ module.exports = function (app) {
     app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
     app.get('/users', getUsers);
+    app.get('/users/:id', getPicturesForUser);
 }
 
 function getImages(request, response) {
@@ -51,6 +52,13 @@ function getImages(request, response) {
         docs.forEach(e => images.push(e))
         response.status(200).json(images)
     })
+}
+
+function getPicturesForUser(request, response) {
+    // request.params.id - id of our user!!! this is name1 if users/name1
+    const id = request.params.id // name of our user
+    console.log("name" + id);
+    console.log("###");
 }
 
 function deleteImage (request, response) {
