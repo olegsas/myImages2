@@ -3,7 +3,7 @@
 
 <ul ng-repeat = "user in users">
     <li>
-        <a ui-sref = "users({ username: user.local.name })">{{user.local.name}}</a>
+        <a ui-sref = "users({ user_id: user._id })">{{user.local.name}}</a>
 
         <!--I try to use name of user like name1-->
     </li>

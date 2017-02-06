@@ -52,15 +52,18 @@ function getImages(request, response) {
         docs.forEach(e => images.push(e))
         response.status(200).json(images)
     })
-}
+};
 
 function getPicturesForUser(request, response) {
     // request.params.id - id of our user!!! this is name1 if users/name1
     const id = request.params.id // name of our user
     console.log("name" + id);
     const imagesForUser = [];
-    //Image.find({'_owner': })
-}
+    Image.find({'_owner': id}, function (err, docs) {
+        docs.forEach(e => imagesForUser.push(e))
+        response.status(200).json(imagesForUser)
+    })
+};
 
 function deleteImage (request, response) {
     const id = request.params.id;
