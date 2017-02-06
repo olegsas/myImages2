@@ -1,9 +1,9 @@
 
-<h2>All users</h2>
+<h2 ng-controller="checkboxCtrl">All users</h2>
 
 <ul ng-repeat = "user in users">
     <li>
-        <a href = "#/users" ui-sref = "users({ name: 'name1' })">{{user.local.name}}</a>
+        <a ui-sref = "users({ user: 'name1' })">{{user.local.name}}</a>
 
         <!--I try to use name of user like name1-->
     </li>
