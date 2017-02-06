@@ -1,5 +1,5 @@
-angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
-    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
+angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
+    .controller('usersCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
        console.log($stateParams.username);
        $scope.stateUsername = $stateParams.username;
        //console.log(Upload.upload);
@@ -50,6 +50,15 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
             $scope.public = public.data.public;
         });
 
+        // we get all the pictures for the user/username
+        // we have stateUsername!
+        $http.get('/users/' + $scope.stateUsername)
+        .then(images => {
+            $scope.images = null;//images.data;
+
+        });
+        // question! How can we know that we have images for the certain user?
+
         $scope.update = function() {
         // console.log('====');
         //  console.log('$scope.public = ' + $scope.public);
@@ -73,7 +82,6 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
             console.log("start");
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
-            console.log("image.id = " + image._id);
             $http.delete('/image/' + image._id)
                 .then(res => {
                     $scope.images.splice(index, 1);
@@ -85,7 +93,3 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
         };
 
     });
-
-
-
- 
