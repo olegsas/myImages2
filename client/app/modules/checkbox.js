@@ -1,6 +1,7 @@
 angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
     .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
        console.log($stateParams.username);
+       $scope.stateUsername = $stateParams.username;
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
@@ -33,7 +34,7 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
             //     $scope.images.push({url: img})
             // })
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 // I borrowed the code above the line from the controller home.js
         
         $http.get('/getUserName')
