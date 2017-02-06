@@ -1,7 +1,7 @@
 angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
     .controller('usersCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
-       console.log($stateParams.username);
-       $scope.stateUsername = $stateParams.username;
+       console.log($stateParams.user_id);
+       $scope.stateUser_id = $stateParams.user_id;
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
