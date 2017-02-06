@@ -50,6 +50,15 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
             $scope.public = public.data.public;
         });
 
+        // we get all the pictures for the user/username
+        // we have stateUsername!
+        $http.get('/users/' + $scope.stateUsername)
+        .then(images => {
+            $scope.images = null;//images.data;
+
+        });
+        // question! How can we know that we have images for the certain user?
+
         $scope.update = function() {
         // console.log('====');
         //  console.log('$scope.public = ' + $scope.public);
