@@ -1,5 +1,6 @@
-angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
-    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal) {
+angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
+    .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
+       console.log($stateParams);
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];

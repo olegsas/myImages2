@@ -55,7 +55,7 @@ angular.module('app', [
                 authenticate: false
             })
             .state('users', {
-                url: '/users',
+                url: '/users/{username}',
                 templateUrl: 'templates/users.html',
                 controller: 'checkboxCtrl',
                 authenticate: false
