@@ -37,8 +37,8 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
         
         $http.get('/getUserName')
         .then(name => {
-            //
-            // console.log("name.data = " + name.data.name);
+            console.log("================username===================");
+             console.log("name.data = " + name.data.name);
             $scope.name = name.data.name;
         });
         

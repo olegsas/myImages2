@@ -108,7 +108,7 @@ function deleteImage (request, response) {
 
 function getUsers (request, response) {
     const users = [];
-    User.find({}, function (err, docs) {
+    User.find({public: true}, function (err, docs) {
         // console.log("docs = " + docs);
         // console.log("docs local name = " + docs[1].local.name);
         // docs.forEach(e => console.log("e= " + e.local.name));
