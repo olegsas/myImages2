@@ -103,4 +103,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
             // angular.element(body).css('cursor', 'default');
         };
 
+        $scope.userLoggedIn = function(name, nameForId){
+            return true //($scope.name === $scope.nameForId)
+        };
+
     });

@@ -16,6 +16,7 @@
             <h3>{{imagesForUsers.length}} картинки</h3>
             <h3 style = "color: red">проверка {{name === nameForId}}</h3>
             <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in imagesForUsers">
+                <button class = "close myPictureClose" ng-show = userLoggedIn() ng-click = "deletePicture(image, $index)">x</button>
                 <!---->
                 <!--<button class = "close myPictureClose" ng-click = "deletePicture(image, $index)">x</button>-->
                 <!--if admin can delete the picture-->
