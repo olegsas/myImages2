@@ -107,23 +107,10 @@ function deleteImage (request, response) {
 };
 
 function getUsers (request, response) {
-    const id = request.session._id;// id logged-in user
-    User.findOne({'_id': id}, function(err, doc) {
-        const isAdmin = doc.isAdmin; // we check if logged-in user is admin
-    })
     const users = [];
-    if(isAdmin === true){
-        User.find({}, function (err, docs) {
-            // console.log("docs = " + docs);
-            // console.log("docs local name = " + docs[1].local.name);
-            // docs.forEach(e => console.log("e= " + e.local.name));
-            docs.forEach(e => users.push(e));
-            // users.push(docs[0].local.name);
-            // users.push(docs[1].local.name);
-            // console.log("after push = " + users[0]);
-            response.status(200).json(users);
-        });
-    } else {
+    const id = request.session._id;// id logged-in user
+    if (id == undefined) {
+        // user is not logged in we show only public users
         User.find({public: true}, function (err, docs) {
             // console.log("docs = " + docs);
             // console.log("docs local name = " + docs[1].local.name);
@@ -134,5 +121,35 @@ function getUsers (request, response) {
             // console.log("after push = " + users[0]);
             response.status(200).json(users);
         });
+    } else {
+        // admin or user is logged in
+        User.findOne({'_id': id}, function(err, doc) {
+        console.log(doc);
+        const isAdmin = doc.isAdmin; // we check if logged-in user is admin
+        console.log(isAdmin);
+        });
+        if(isAdmin === true){
+            User.find({}, function (err, docs) {
+            // console.log("docs = " + docs);
+            // console.log("docs local name = " + docs[1].local.name);
+            // docs.forEach(e => console.log("e= " + e.local.name));
+            docs.forEach(e => users.push(e));
+            // users.push(docs[0].local.name);
+            // users.push(docs[1].local.name);
+            // console.log("after push = " + users[0]);
+            response.status(200).json(users);
+            });
+        } else {
+            User.find({public: true}, function (err, docs) {
+            // console.log("docs = " + docs);
+            // console.log("docs local name = " + docs[1].local.name);
+            // docs.forEach(e => console.log("e= " + e.local.name));
+            docs.forEach(e => users.push(e));
+            // users.push(docs[0].local.name);
+            // users.push(docs[1].local.name);
+            // console.log("after push = " + users[0]);
+            response.status(200).json(users);
+            });
+        }
     }
-}
+};
