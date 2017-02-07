@@ -119,4 +119,50 @@ function getUsers (request, response) {
         response.status(200).json(users);
     })
 
-}
+};
+
+function getUserName (req, res){
+	User.findOne({_id: req.session._id}, function(err, result){
+		if(err){
+			sendJSONresponse(res, 404, err);
+			return;
+		}
+		if(result){
+			//res.send({public:result});
+			// console.log("server ansver" + result);
+			// console.log(result.local.name);
+			res.send({name: result.local.name});
+		}
+	})
+};
+
+function updateProfile (req, res){
+	User.update({
+        "_id": req.session._id
+    }, {
+        "public": req.body.public
+    }, (err, response) => {
+        if (err) {
+            return handleError(err)
+        }
+        res.status(200).json({
+            public: req.body.public
+        })
+    })
+	
+};
+
+function getUserProfile (req, res){
+	User.findOne({_id: req.session._id}, function(err, result){
+		if(err){
+			sendJSONresponse(res, 404, err);
+			return;
+		}
+		if(result){
+			//res.send({public:result});
+			// console.log("server ansver" + result);
+			// console.log(result.public);
+			res.send({public: result.public}); // for the debug only
+		}
+	})
+};
