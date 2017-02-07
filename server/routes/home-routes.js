@@ -45,6 +45,9 @@ module.exports = function (app) {
     app.get('/users', getUsers);
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
+    app.post('/updateProfile', updateProfile);
+    app.get('/getUserProfile', getUserProfile);
+    app.get('/getUserName', getUserName);
 }
 
 function getImages(request, response) {
