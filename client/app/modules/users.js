@@ -104,7 +104,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         };
 
         $scope.userLoggedIn = function(name, nameForId){
-            return true //($scope.name === $scope.nameForId)
+            return ($scope.name === $scope.nameForId)
         };
 
     });
