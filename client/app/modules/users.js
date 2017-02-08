@@ -13,6 +13,13 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         return token.name; // we have username logged-in
     }
 
+    function isAdminJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        var token = jwtHelper.decodeToken(jwtFull);
+        console.log("tokenAdmin = " + token.isAdmin);
+        return token.isAdmin; // if this user is admin
+    }
+
     $scope.$watch('file', function () {
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
@@ -120,4 +127,11 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             return ($scope.name === $scope.nameForId)
         };
 
+        $scope.userOwnerOrAdmin = function() {
+            console.log("ifUserOrAdmin = " + (($scope.name === $scope.nameForId) || (isAdminJwt())));
+            return (($scope.name === $scope.nameForId) || (isAdminJwt()))
+        }
+
     });
+
+    //console.log("userOwnerOrAdmin = " + $scope.userOwnerOrAdmin());
