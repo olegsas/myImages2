@@ -8,7 +8,8 @@ angular.module('app', [
     'ngFileUpload',
     'app.checkbox',
     'app.modalWindow',
-    'app.users'
+    'app.users',
+    'angular-jwt'
 ])
 
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',
