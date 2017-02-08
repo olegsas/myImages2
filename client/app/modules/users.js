@@ -7,6 +7,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
     $scope.images = [];
     $scope.imagesForUsers = [];
 
+    function nameJwt() {
+        return window.localStorage.getItem('jwt');
+    }
+
     $scope.$watch('file', function () {
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
@@ -38,6 +42,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         .catch(err => console.log(err));
 // I borrowed the code above the line from the controller home.js
         
+        
+        
+        //
+        
         $http.get('/getUsernameForId/'+$scope.stateUser_id)
             .then(nameForId => {    
                 //debugger;
@@ -46,12 +54,15 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
             });
         // we need to find username for this _id
 
-        $http.get('/getUserName')
-        .then(name => {
-            //
-            // console.log("name.data = " + name.data.name);
-            $scope.name = name.data.name;
-        });
+        $scope.name = nameJwt();//
+        console.log("scope.name.jwt = " + $scope.name);
+
+        // $http.get('/getUserName')
+        // .then(name => {
+        //     //
+        //     // console.log("name.data = " + name.data.name);
+        //     $scope.name = name.data.name;
+        // });
         
         $http.get('/getUserProfile')
         .then(public => {
