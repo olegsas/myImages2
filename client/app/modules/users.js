@@ -9,15 +9,24 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
     function nameJwt() {
         var jwtFull = window.localStorage.getItem('jwt');
-        var token = jwtHelper.decodeToken(jwtFull);
-        return token.name; // we have username logged-in
+        if (jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("===============" + token.name);
+            return token.name; // we have username logged-in
+        } else {
+            return null;
+        }    
     }
 
     function isAdminJwt() {
         var jwtFull = window.localStorage.getItem('jwt');
-        var token = jwtHelper.decodeToken(jwtFull);
-        console.log("tokenAdmin = " + token.isAdmin);
-        return token.isAdmin; // if this user is admin
+        if(jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("tokenAdmin = " + token.isAdmin);
+            return token.isAdmin; // if this user is admin
+        } else {
+            return null;
+        }
     }
 
     $scope.$watch('file', function () {
