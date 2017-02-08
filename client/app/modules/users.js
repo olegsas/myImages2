@@ -1,11 +1,33 @@
-angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
-    .controller('usersCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
+angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', 'angular-jwt'])
+    .controller('usersCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams, jwtHelper) {
        console.log($stateParams.user_id);
        $scope.stateUser_id = $stateParams.user_id;
        //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
     $scope.imagesForUsers = [];
+
+    function nameJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if (jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("===============" + token.name);
+            return token.name; // we have username logged-in
+        } else {
+            return null;
+        }    
+    }
+
+    function isAdminJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if(jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("tokenAdmin = " + token.isAdmin);
+            return token.isAdmin; // if this user is admin
+        } else {
+            return null;
+        }
+    }
 
     $scope.$watch('file', function () {
         if ($scope.file != null) {
@@ -38,6 +60,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
         .catch(err => console.log(err));
 // I borrowed the code above the line from the controller home.js
         
+        
+        
+        //
+        
         $http.get('/getUsernameForId/'+$scope.stateUser_id)
             .then(nameForId => {    
                 //debugger;
@@ -46,12 +72,15 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
             });
         // we need to find username for this _id
 
-        $http.get('/getUserName')
-        .then(name => {
-            //
-            // console.log("name.data = " + name.data.name);
-            $scope.name = name.data.name;
-        });
+        $scope.name = nameJwt();//
+        console.log("scope.name.jwt = " + $scope.name);
+
+        // $http.get('/getUserName')
+        // .then(name => {
+        //     //
+        //     // console.log("name.data = " + name.data.name);
+        //     $scope.name = name.data.name;
+        // });
         
         $http.get('/getUserProfile')
         .then(public => {
@@ -107,4 +136,11 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
             return ($scope.name === $scope.nameForId)
         };
 
+        $scope.userOwnerOrAdmin = function() {
+            console.log("ifUserOrAdmin = " + (($scope.name === $scope.nameForId) || (isAdminJwt())));
+            return (($scope.name === $scope.nameForId) || (isAdminJwt()))
+        }
+
     });
+
+    //console.log("userOwnerOrAdmin = " + $scope.userOwnerOrAdmin());

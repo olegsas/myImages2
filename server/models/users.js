@@ -58,11 +58,12 @@ userSchema.methods.validPassword = function (password) {
 userSchema.methods.generateJwt = function () {
 	const expiry = new Date();
 	expiry.setDate(expiry.getDate() + 7);
-
+	// we return public and isAdmin properties
 	return jwt.sign({
 		_id: this._id,
 		email: this.local.email,
 		name: this.local.name,
+		isAdmin: this.isAdmin,
 		exp: parseInt(expiry.getTime() / 1000)
 	}, 'process.env.JWT_SECRET');
 };
