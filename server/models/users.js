@@ -63,7 +63,6 @@ userSchema.methods.generateJwt = function () {
 		_id: this._id,
 		email: this.local.email,
 		name: this.local.name,
-		public: this.public,
 		isAdmin: this.isAdmin,
 		exp: parseInt(expiry.getTime() / 1000)
 	}, 'process.env.JWT_SECRET');
