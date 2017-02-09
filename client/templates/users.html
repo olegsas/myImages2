@@ -1,7 +1,16 @@
 <div ng-controller = "usersCtrl">
-    <h2>user is {{stateUser_id}}</h2>
-    <h2>name for id {{nameForId}}</h2>
-    <h3>My name is {{name}}</h3>
+    <div class = "row">
+        <div class = "col-sm-3 col-3" style = "border: 2px solid black">
+            <h4>user is {{stateUser_id}}</h4>
+            <h4>name for id {{nameForId}}</h4>
+            <h4>My name is {{name}}</h4>
+        </div>
+        <div class = "col-sm-9 col-9" style = "border: 2px solid black">
+            <h3>body</h3>
+        </div>
+    </div>    
+    
+    
     <!--<form name = "myForm">
         <label>Change the public/private profile. Public:
             <input type = "checkbox" ng-model = "public" ng-change = "update()">
