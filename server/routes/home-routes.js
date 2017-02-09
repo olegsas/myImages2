@@ -134,7 +134,16 @@ function getUsersUser (request, response) {
     User.find({'_id': id}, function (err, docs) {
         docs.forEach(e => users.push(e));
         if(users[0]){
-            //////
+            if('_doc' in users[0]){
+                if('public' in users[0]._doc){
+                    var user = users[0]._doc.public;
+                    console.log("ispublic==========" + user);
+                    if(user){
+                        console.log("yessssssssssssssssssssssssss");
+                        users.pop();
+                    }
+                }
+            }
         };
         
         response.status(200).json(users);
