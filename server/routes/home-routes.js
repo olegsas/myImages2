@@ -133,10 +133,48 @@ function getUsersUser (request, response) {
     const id = request.session._id; // name of our user
     User.find({'_id': id}, function (err, docs) {
         docs.forEach(e => users.push(e));
-        response.status(200).json(users);
-    })
+        if(users[0]){
+            if('_doc' in users[0]){
+                if('public' in users[0]._doc){
+                    var user = users[0]._doc.public;
+                    console.log("ispublic==========" + user);
+                    if(user){
+                        console.log("yessssssssssssssssssssssssss");
+                        users.pop();
+                    }
+                }
+            }
+        };
+        
+    response.status(200).json(users);    
+    });
+    
 };
 // get public users
+
+// function getUsersUser (request, response) {
+//     console.log("Userrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+//     // we need public users and this user
+//     const users = [];
+//     const id = request.session._id; // name of our user
+//     User.find({'_id': id}, function (err, docs) {
+//         docs.forEach(e => users.push(e));
+//         if(users[0]){
+//             if('_doc' in users[0]){
+//                 if('public' in users[0]._doc){
+//                     var user = users[0]._doc.public;
+//                     console.log("ispublic==========" + user);
+//                     if(user){
+//                         users.pop();
+//                     }
+//                 }
+//             }
+//         }
+// response.status(200).json(users);    
+// });
+
+    
+// };
     
     // console.log("sess = " + sess);
     // if('session' in request){
