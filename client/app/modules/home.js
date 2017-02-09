@@ -56,6 +56,7 @@ angular.module('app.home', ['ngFileUpload'])
                     users.data.forEach(users => {
                         $scope.users.push(users)
                     });
+                    debugger;
                 })
                 .catch(err => console.log(err));
         }
