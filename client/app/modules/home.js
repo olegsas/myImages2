@@ -6,15 +6,25 @@ angular.module('app.home', ['ngFileUpload'])
     $scope.users = [];
 
     
+    function existJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if(jwtFull){
+            return true; 
+        } else {
+            return false;
+        }
+    }
+    
+    
+    // $http.get('/images')
+    //     .then(images => {
+    //         images.data.forEach(img => {
+    //             $scope.images.push({url: img})
+    //         })
+    //     })
+    //     .catch(err => console.log(err));
 
-    $http.get('/images')
-        .then(images => {
-            images.data.forEach(img => {
-                $scope.images.push({url: img})
-            })
-        })
-        .catch(err => console.log(err));
-
+    if(!existJwt()){
     $http.get('/users/anonim')
         .then(users => {
             console.log("We get users==============================");
@@ -22,5 +32,7 @@ angular.module('app.home', ['ngFileUpload'])
                 $scope.users.push(users)
             });
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
+    }
+
 });
