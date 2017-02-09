@@ -146,8 +146,9 @@ function getUsersUser (request, response) {
             }
         };
         
-        response.status(200).json(users);
-    })
+    response.status(200).json(users);    
+    });
+    
 };
 // get public users
 

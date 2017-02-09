@@ -58,6 +58,16 @@ angular.module('app.home', ['ngFileUpload'])
                     });
                 })
                 .catch(err => console.log(err));
+            // we has the user if he is private
+            $http.get('/users/anonim')
+        .then(users => {
+            console.log("We get users==============================");
+            users.data.forEach(users => {
+                $scope.users.push(users)
+            });
+        })
+        .catch(err => console.log(err));
+
         }
     }
 
