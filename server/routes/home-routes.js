@@ -42,9 +42,12 @@ module.exports = function (app) {
     app.get('/images', getImages);
     app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
-    app.get('/users', getUsers);
+    app.get('/users/anonim', getUsersAnonim);
+    app.get('/users/admin', getUsersAdmin);
+    app.get('/users/user', getUsersUser);
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
+    
 }
 
 function getImages(request, response) {
@@ -69,7 +72,7 @@ function getPicturesForUser(request, response) {
     console.log("name" + id);
     const imagesForUser = [];
     Image.find({'_owner': id}, function (err, docs) {
-        docs.forEach(e => imagesForUser.push(e))
+        // docs.forEach(e => imagesForUser.push(e))
         response.status(200).json(imagesForUser)
     })
 };
@@ -106,17 +109,62 @@ function deleteImage (request, response) {
     });
 };
 
-function getUsers (request, response) {
+function getUsersAnonim (request, response) {
     const users = [];
     User.find({public: true}, function (err, docs) {
-        // console.log("docs = " + docs);
-        // console.log("docs local name = " + docs[1].local.name);
-        // docs.forEach(e => console.log("e= " + e.local.name));
+            docs.forEach(e => users.push(e));
+            response.status(200).json(users);
+        })
+};
+
+function getUsersAdmin (request, response) {
+    console.log("Adminnnnnnnnnnnnnnnnnnn");
+    const users = [];
+    User.find({}, function (err, docs) {
         docs.forEach(e => users.push(e));
-        // users.push(docs[0].local.name);
-        // users.push(docs[1].local.name);
-        // console.log("after push = " + users[0]);
         response.status(200).json(users);
     })
+};
 
-}
+function getUsersUser (request, response) {
+    console.log("Userrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    // we need public users and this user
+    const users = [];
+    const id = request.session._id; // name of our user
+    User.find({'_id': id}, function (err, docs) {
+        docs.forEach(e => users.push(e));
+        response.status(200).json(users);
+    })
+};
+// get public users
+    
+    // console.log("sess = " + sess);
+    // if('session' in request){
+    //     User.find({public: true}, function (err, docs) {
+    //         // console.log("docs = " + docs);
+    //         // console.log("docs local name = " + docs[1].local.name);
+    //         // docs.forEach(e => console.log("e= " + e.local.name));
+    //         docs.forEach(e => users.push(e));
+    //         // users.push(docs[0].local.name);
+    //         // users.push(docs[1].local.name);
+    //         // console.log("after push = " + users[0]);
+    //         response.status(200).json(users);
+    //     })
+    // } else {
+    //     response.status(200)
+    // }
+
+    // if('session' in request){
+    //     if('_id' in request.session){
+    //         console.log("registered");
+    //         response.status(200);
+    //     } else {
+    //         console.log("anonim");
+    //         response.status(200);
+    //     }
+    // } else{
+    //     console.log("anonim");
+    //     response.status(200);
+    // }
+
+

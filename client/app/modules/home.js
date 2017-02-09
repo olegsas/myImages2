@@ -1,26 +1,64 @@
 angular.module('app.home', ['ngFileUpload'])
 
-.controller('homeCtrl', function($scope, $http, Upload ) {
+.controller('homeCtrl', function($scope, $http, Upload, jwtHelper) {
     $scope.methods = {};
     $scope.images = [];
     $scope.users = [];
 
     
+    function existJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if(jwtFull){
+            return true; 
+        } else {
+            return false;
+        }
+    };
 
-    $http.get('/images')
-        .then(images => {
-            images.data.forEach(img => {
-                $scope.images.push({url: img})
-            })
-        })
-        .catch(err => console.log(err));
+    function adminJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if(jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("tokenAdmin = " + token.isAdmin);
+            return token.isAdmin; // if this user is admin
+        } else {
+            return null;
+        }
+    };
 
-    $http.get('/users')
+
+
+    if(!existJwt()){
+    $http.get('/users/anonim')
         .then(users => {
             console.log("We get users==============================");
             users.data.forEach(users => {
                 $scope.users.push(users)
             });
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
+    } else {
+        if(adminJwt()){ 
+            // admin logged in
+            console.log("Admin loggggggggggggggggggggg");
+            $http.get('/users/admin')
+                .then(users => {
+                    users.data.forEach(users => {
+                        $scope.users.push(users)
+                    });
+                })
+                .catch(err => console.log(err));
+        } else {
+            // user logged in
+            console.log("userrrrrrrrrrrrrrr log in");
+            $http.get('/users/user')
+                .then(users => {
+                    users.data.forEach(users => {
+                        $scope.users.push(users)
+                    });
+                })
+                .catch(err => console.log(err));
+        }
+    }
+
 });

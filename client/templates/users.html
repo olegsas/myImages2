@@ -2,15 +2,17 @@
     <div class = "row">
         <div class = "col-sm-3 col-3" style = "border: 2px solid black">
             <h4>name for id {{nameForId}}</h4>
-            <form name = "myForm">
+            <!--<div ng-if = "userOwnerOrAdmin()">-->
+            <form  name = "myForm">
                 <label>Change the public/private profile. Public:
                     <input type = "checkbox" ng-model = "public" ng-change = "update()">
                 </label><br/>
                 <tt>your profile is  
-                    <span ng-show = "showPublic()">public</span>
-                    <span ng-show = "!showPublic()">private</span>
+                    <span ng-if = "showPublic()">public</span>
+                    <span ng-if = "!showPublic()">private</span>
                     </tt><br/>
             </form>
+            <!--</div>-->
 
         </div>
         <div class = "col-sm-9 col-9" style = "border: 2px solid black">
@@ -28,7 +30,7 @@
             </div>
         
         
-            <div ng-if = userOwnerOrAdmin() style="margin: 20px" >
+            <div ng-if = "userOwnerOrAdmin()" style="margin: 20px" >
                 <div ngf-drop ngf-select ng-model="file" class="drop-box" 
                     ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
                     accept="image/*" 
