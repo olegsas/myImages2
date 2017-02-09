@@ -43,8 +43,10 @@ module.exports = function (app) {
     app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
     app.get('/users/anonim', getUsersAnonim);
+    app.get('/users/admin', getUsersAdmin);
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
+    
 }
 
 function getImages(request, response) {
@@ -69,7 +71,7 @@ function getPicturesForUser(request, response) {
     console.log("name" + id);
     const imagesForUser = [];
     Image.find({'_owner': id}, function (err, docs) {
-        docs.forEach(e => imagesForUser.push(e))
+        // docs.forEach(e => imagesForUser.push(e))
         response.status(200).json(imagesForUser)
     })
 };
@@ -112,7 +114,17 @@ function getUsersAnonim (request, response) {
             docs.forEach(e => users.push(e));
             response.status(200).json(users);
         })
-}// get public users
+};
+
+function getUsersAdmin (request, response) {
+    console.log("Adminnnnnnnnnnnnnnnnnnn");
+    const users = [];
+    User.find({}, function (err, docs) {
+        docs.forEach(e => users.push(e));
+        response.status(200).json(users);
+    })
+};
+// get public users
     
     // console.log("sess = " + sess);
     // if('session' in request){
