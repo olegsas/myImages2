@@ -74,13 +74,6 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
         $scope.name = nameJwt();//
         console.log("scope.name.jwt = " + $scope.name);
-
-        // $http.get('/getUserName')
-        // .then(name => {
-        //     //
-        //     // console.log("name.data = " + name.data.name);
-        //     $scope.name = name.data.name;
-        // });
         
         $http.get('/getUserProfile')
         .then(public => {
@@ -88,9 +81,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             $scope.public = public.data.public;
         });
 
-        $scope.showPublic = function() {
-            return $scope.public;
-        }
+        
 
         // we get all the pictures for the user/username
         // we have stateUsername!
@@ -143,7 +134,11 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         $scope.userOwnerOrAdmin = function() {
             console.log("ifUserOrAdmin = " + (($scope.name === $scope.nameForId) || (isAdminJwt())));
             return (($scope.name === $scope.nameForId) || (isAdminJwt()))
-        }
+        };
+
+        $scope.showPublic = function() {
+            return $scope.public;
+        };
 
     });
 

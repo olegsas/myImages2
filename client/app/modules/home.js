@@ -15,7 +15,7 @@ angular.module('app.home', ['ngFileUpload'])
         })
         .catch(err => console.log(err));
 
-    $http.get('/users')
+    $http.get('/users/anonim')
         .then(users => {
             console.log("We get users==============================");
             users.data.forEach(users => {
