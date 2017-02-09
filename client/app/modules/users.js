@@ -88,6 +88,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             $scope.public = public.data.public;
         });
 
+        $scope.showPublic = function() {
+            return $scope.public;
+        }
+
         // we get all the pictures for the user/username
         // we have stateUsername!
         $http.get('/users/' + $scope.stateUser_id)
