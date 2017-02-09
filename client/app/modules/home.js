@@ -14,15 +14,6 @@ angular.module('app.home', ['ngFileUpload'])
             return false;
         }
     }
-    
-    
-    // $http.get('/images')
-    //     .then(images => {
-    //         images.data.forEach(img => {
-    //             $scope.images.push({url: img})
-    //         })
-    //     })
-    //     .catch(err => console.log(err));
 
     if(!existJwt()){
     $http.get('/users/anonim')
