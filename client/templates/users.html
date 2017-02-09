@@ -1,56 +1,47 @@
 <div ng-controller = "usersCtrl">
     <div class = "row">
         <div class = "col-sm-3 col-3" style = "border: 2px solid black">
-            <h4>user is {{stateUser_id}}</h4>
             <h4>name for id {{nameForId}}</h4>
-            <h4>My name is {{name}}</h4>
+            <form name = "myForm">
+                <label>Change the public/private profile. Public:
+                    <input type = "checkbox" ng-model = "public" ng-change = "update()">
+                </label><br/>
+                <tt>your profile is  
+                    <span ng-show = "showPublic()">public</span>
+                    <span ng-show = "!showPublic()">private</span>
+                    </tt><br/>
+            </form>
+
         </div>
         <div class = "col-sm-9 col-9" style = "border: 2px solid black">
-            <h3>body</h3>
+            <h4>You are logged in as <strong>{{name}}</strong></h4>
+            <div class = "jumbotron row">
+                <h3>{{imagesForUsers.length}} картинки</h3>
+                <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in imagesForUsers">
+                    <button class = "close myPictureClose" ng-if = userOwnerOrAdmin() ng-click = "deletePicture(image, $index)">x</button>
+                        <a title = "Image" href = "#">
+                        <a ng-click="openLightboxModal($index)">
+                            <img class = "thumbnail img-responsive" ng-src = {{image.url}}>
+                        </a>
+                        </a>
+                </div>
+            </div>
+        
+        
+            <div ng-if = userOwnerOrAdmin() style="margin: 20px" >
+                <div ngf-drop ngf-select ng-model="file" class="drop-box" 
+                    ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
+                    accept="image/*" 
+                    ngf-pattern="'image/*'">
+                    Drop images here or click to upload
+                </div>
+            </div>
         </div>
     </div>    
     
-    
-    <!--<form name = "myForm">
-        <label>Change the public/private profile. Public:
-            <input type = "checkbox" ng-model = "public" ng-change = "update()">
-        </label><br/>
-        <tt>public = {{public}}</tt><br/>
-    </form>-->
-    <!---->
-    <!--if admin we can change the public/private profile-->
-    <!---->
     <div class = "container">
-        <div class = "jumbotron row">
-            <h3>{{imagesForUsers.length}} картинки</h3>
-            <!--<h3 style = "color: red">проверка {{name === nameForId}}</h3>-->
-            <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in imagesForUsers">
-                <button class = "close myPictureClose" ng-if = userOwnerOrAdmin() ng-click = "deletePicture(image, $index)">x</button>
-                <!---->
-                <!--<button class = "close myPictureClose" ng-click = "deletePicture(image, $index)">x</button>-->
-                <!--if admin can delete the picture-->
-                <!---->
-                <!--class myPictureClose I add to customize position of the button-->
-                <a title = "Image" href = "#">
-                    <a ng-click="openLightboxModal($index)">
-                        <img class = "thumbnail img-responsive" ng-src = {{image.url}}>
-                    </a>
-                </a>
-                <!--<button ng-click="openModal(image.url)">hello modal</button>-->
-            </div>
-        </div>
+        
     </div>
 
-    <div ng-if = userOwnerOrAdmin() style="margin-top: 20px" class="container">
-        <div ngf-drop ngf-select ng-model="file" class="drop-box" 
-            ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
-            accept="image/*" 
-            ngf-pattern="'image/*'">
-                Drop images here or click to upload
-        </div>
-    </div>
-    <!---->
-    <!--if admin can add pictures to the user-->
-    <!---->
-
+    
 </div>
