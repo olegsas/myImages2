@@ -38,7 +38,7 @@ angular.module('app.home', ['ngFileUpload'])
         })
         .catch(err => console.log(err));
     } else {
-        if(adminJwt()){
+        if(adminJwt()){ 
             // admin logged in
             console.log("Admin loggggggggggggggggggggg");
             $http.get('/users/admin')
@@ -50,6 +50,14 @@ angular.module('app.home', ['ngFileUpload'])
                 .catch(err => console.log(err));
         } else {
             // user logged in
+            console.log("userrrrrrrrrrrrrrr log in");
+            $http.get('/users/user')
+                .then(users => {
+                    users.data.forEach(users => {
+                        $scope.users.push(users)
+                    });
+                })
+                .catch(err => console.log(err));
         }
     }
 

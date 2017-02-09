@@ -44,6 +44,7 @@ module.exports = function (app) {
     app.delete('/image/:id', deleteImage);
     app.get('/users/anonim', getUsersAnonim);
     app.get('/users/admin', getUsersAdmin);
+    app.get('/users/user', getUsersUser);
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
     
@@ -120,6 +121,17 @@ function getUsersAdmin (request, response) {
     console.log("Adminnnnnnnnnnnnnnnnnnn");
     const users = [];
     User.find({}, function (err, docs) {
+        docs.forEach(e => users.push(e));
+        response.status(200).json(users);
+    })
+};
+
+function getUsersUser (request, response) {
+    console.log("Userrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    // we need public users and this user
+    const users = [];
+    const id = request.session._id; // name of our user
+    User.find({'_id': id}, function (err, docs) {
         docs.forEach(e => users.push(e));
         response.status(200).json(users);
     })
