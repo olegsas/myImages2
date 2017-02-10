@@ -1,6 +1,7 @@
 angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', 'angular-jwt'])
-    .controller('usersCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams, jwtHelper) {
-       console.log($stateParams.user_id);
+    .controller('usersCtrl', function($scope, $rootScope, $http, Upload, Lightbox, $uibModal, $stateParams, jwtHelper) {
+       console.log("$stateParams.user_id = "+$stateParams.user_id);
+       $rootScope.userr = $stateParams.user_id;
        $scope.stateUser_id = $stateParams.user_id;
        //console.log(Upload.upload);
         $scope.methods = {};
@@ -74,6 +75,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
         $scope.name = nameJwt();//
         console.log("scope.name.jwt = " + $scope.name);
+        $rootScope.name = $scope.name;
         
         $http.get('/getUserProfile')
         .then(public => {
