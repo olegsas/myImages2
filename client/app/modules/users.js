@@ -156,14 +156,14 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
                 .then(profile => {
                     console.log("look-------------------------");
                     //debugger;
-                    $scope.profileForId = profile.data.public;
-                    console.log("look-----" + $scope.profileForId);
+                    $scope.publicForId = profile.data.public;
+                    console.log("look-----" + $scope.publicForId);
                 })
                 .catch(err => console.log(err));
         };
 
         $scope.showPublicForId = function() {
-            return $scope.profileForId;
+            return $scope.publicForId;
         }
 
 
