@@ -45,7 +45,9 @@ angular.module('app.auth', ['angular-jwt'])
     };
     $scope.login = async function() {
         await AuthService.login($scope.username, $scope.password);
-        $rootScope.profName = 'Profile ' + nameJwt();
+        if(nameJwt()) {
+            $rootScope.profName = 'Profile ' + nameJwt();
+        };
         $rootScope.name = nameJwt();
         $state.transitionTo('home')
         

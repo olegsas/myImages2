@@ -5,7 +5,10 @@ angular.module('app.home', ['ngFileUpload'])
     $scope.images = [];
     $scope.users = [];
     $rootScope.name = nameJwt();
-    $rootScope.profName = 'Profile ' + nameJwt();
+    if(nameJwt()) {
+        $rootScope.profName = 'Profile ' + nameJwt();
+    }
+    
 
     
     function existJwt() {
