@@ -127,13 +127,18 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             // angular.element(body).css('cursor', 'default');
         };
 
-        $scope.userLoggedIn = function(name, nameForId){
-            return ($scope.name === $scope.nameForId)
-        };
 
         $scope.userOwnerOrAdmin = function() {
             console.log("ifUserOrAdmin = " + (($scope.name === $scope.nameForId) || (isAdminJwt())));
             return (($scope.name === $scope.nameForId) || (isAdminJwt()))
+        };
+
+        $scope.userOwner = function() {
+            return ($scope.name === $scope.nameForId);
+        };
+
+        $scope.userAdmin = function() {
+            return ((isAdminJwt()) && ($scope.name !== $scope.nameForId))
         };
 
         $scope.showPublic = function() {
@@ -142,4 +147,4 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
     });
 
-    //console.log("userOwnerOrAdmin = " + $scope.userOwnerOrAdmin());
+    
