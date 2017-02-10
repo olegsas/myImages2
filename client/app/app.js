@@ -71,7 +71,10 @@ angular.module('app', [
 
     $scope.logout = async function () {
         await AuthService.logout()
-        $scope.authenticated = false
+        $scope.authenticated = false;
+        $rootScope.profName = '';
+        $rootScope.name = '';
+        $rootScope.userId = '';
         $state.transitionTo('login')
     }
 

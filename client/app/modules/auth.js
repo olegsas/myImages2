@@ -1,4 +1,4 @@
-angular.module('app.auth', [])
+angular.module('app.auth', ['angular-jwt'])
 
 .factory('AuthService', function ($http) {
     const auth = {};
@@ -16,7 +16,7 @@ angular.module('app.auth', [])
         let res = await $http.post('/login', {
             email: email,
             password: password
-        })
+        });
         window.localStorage['jwt'] = angular.toJson(res.data.token)
     }
 
@@ -32,15 +32,27 @@ angular.module('app.auth', [])
     return auth;
 })
 
-.controller('authCtrl', function($scope, $rootScope, $http, $state, AuthService) {
+.controller('authCtrl', function($scope, $rootScope, $http, $state, AuthService, jwtHelper) {
+    function nameJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if (jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("===============" + token.name);
+            return token.name; // we have username logged-in
+        } else {
+            return null;
+        }    
+    };
     $scope.login = async function() {
-        await AuthService.login($scope.username, $scope.password)
+        await AuthService.login($scope.username, $scope.password);
+        $rootScope.profName = 'Profile ' + nameJwt();
+        $rootScope.name = nameJwt();
         $state.transitionTo('home')
         
     }
 
     $scope.register = async function() {
-        await AuthService.register($scope.email, $scope.username, $scope.password)
+        await AuthService.register($scope.email, $scope.username, $scope.password);
         $state.transitionTo('home')
     }
 })

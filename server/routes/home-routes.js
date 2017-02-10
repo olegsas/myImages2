@@ -47,6 +47,7 @@ module.exports = function (app) {
     app.get('/users/user', getUsersUser);
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
+    app.get('/getIdFromSession', getIdFromSession);
     
 }
 
@@ -64,7 +65,19 @@ function getUsernameForId(request, response) {
         const name = doc.local.name;
         response.status(200).json({name: name});
     })
-}
+};
+
+function getIdFromSession(request, response) {
+    if('session' in request) {
+        if('_id' in request.session) {
+            const id = request.session._id;
+            console.log("idSession======================== " + id);
+            response.status(200).json({id: id});
+        }
+    } else {
+        response.status(200).json({id: ''});
+    }
+};
 
 function getPicturesForUser(request, response) {
     // request.params.id - id of our user!!! this is name1 if users/name1
