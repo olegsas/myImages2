@@ -1,9 +1,11 @@
 angular.module('app.home', ['ngFileUpload'])
 
-.controller('homeCtrl', function($scope, $http, Upload, jwtHelper) {
+.controller('homeCtrl', function($scope, $rootScope, $http, Upload, jwtHelper) {
     $scope.methods = {};
     $scope.images = [];
     $scope.users = [];
+    $rootScope.name = nameJwt();
+    $rootScope.profName = 'Profile ' + nameJwt();
 
     
     function existJwt() {
@@ -13,6 +15,17 @@ angular.module('app.home', ['ngFileUpload'])
         } else {
             return false;
         }
+    };
+
+    function nameJwt() {
+        var jwtFull = window.localStorage.getItem('jwt');
+        if (jwtFull){
+            var token = jwtHelper.decodeToken(jwtFull);
+            console.log("===============" + token.name);
+            return token.name; // we have username logged-in
+        } else {
+            return null;
+        }    
     };
 
     function adminJwt() {
