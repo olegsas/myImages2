@@ -1,15 +1,25 @@
 
 
-<h2 ng-controller="homeCtrl">All users</h2>
+<div class = "container" ng-controller="homeCtrl">
+    <h4 style = "text-align: center">All users</h4>
 
-<ul ng-repeat = "user in users">
-    <li>
-        <a ui-sref = "users({ user_id: user._id })">{{user.local.name}}</a>
+    <ul class = "list-group" ng-repeat = "user in users">
+        <li class = "list-group-item" style = "text-align: center; font-size: medium">
+            <a ui-sref = "users({ user_id: user._id })">{{user.local.name}}</a>
 
-        <!--I try to use name of user like name1-->
-    </li>
-</ul>
+            <!--I try to use name of user like name1-->
+        </li>
+    </ul>
+</div>
 
+
+<!--<div class="container">
+  
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="user in users"><a href="#/home/{{user.username}}"> {{user.username|uppercase}}</a></li>
+        
+    </ul>
+</div>-->
 
 
 <!--<div >
