@@ -61,6 +61,10 @@ angular.module('app.home', ['ngFileUpload'])
                     });
                 })
                 .catch(err => console.log(err));
+            $http.get('/getIdFromSession')
+                .then(id => {
+                    $rootScope.userId = id.data.id;
+                });
         } else {
             // user logged in
             console.log("userrrrrrrrrrrrrrr log in");
@@ -80,6 +84,11 @@ angular.module('app.home', ['ngFileUpload'])
             });
         })
         .catch(err => console.log(err));
+
+        $http.get('/getIdFromSession')
+                .then(id => {
+                    $rootScope.userId = id.data.id;
+                });
 
         }
     }
