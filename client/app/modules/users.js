@@ -147,6 +147,26 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             return $scope.public;
         };
 
+        ///////////////////////////////////
+
+        if(isAdminJwt()){ 
+            // admin logged in
+            console.log("Admin loggggggggggggggggggggg");
+            $http.get('/getUserProfileForId/' + $scope.stateUser_id)
+                .then(profile => {
+                    console.log("look-------------------------");
+                    //debugger;
+                    $scope.profileForId = profile.data.public;
+                    console.log("look-----" + $scope.profileForId);
+                })
+                .catch(err => console.log(err));
+        };
+
+        $scope.showPublicForId = function() {
+            return $scope.profileForId;
+        }
+
+
     });
 
     
