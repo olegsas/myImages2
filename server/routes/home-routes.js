@@ -100,7 +100,7 @@ function deleteImage (request, response) {
         console.log("go!!");
         if(err){
             console.log("err find");
-            res.json(err);
+            result.json(err);
             return;
         }
         if(result){

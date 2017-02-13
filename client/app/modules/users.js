@@ -5,7 +5,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     $scope.stateUser_id = $stateParams.user_id;
     //console.log(Upload.upload);
     $scope.methods = {};
-    // $scope.images = [];
+    $scope.images = [];
     $scope.imagesForUsers = [];
 
     function nameJwt() {
@@ -34,17 +34,39 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     //     return ($scope.name === $scope.nameForId);
     // }
 
+    
+    $scope.$watch('file', function () {
+        console.log("$scope.file= " + $scope.file);
+        console.log($scope.file);
+        // debugger;
+        if ($scope.file != null) {
+            var body = document.querySelector('body');// we find the body selector
+            angular.element(body).css('cursor', 'progress');
+            Upload.upload({ url: '/image', data: { image: $scope.file } })
+                .then(res => {
+                    if (res.status = 200) {
+                        // debugger;
+                        $scope.images.push({url: res.data});
+                        console.log($scope.images);
+                        // debugger;
+                        angular.element(body).css('cursor', 'default');
+                    }
+                });
+        }
+    });
+
+    
+    
     $http.get('/getUsernameForId/'+$scope.stateUser_id)
         .then(nameForId => {    
         	//debugger;
             $scope.nameForId = nameForId.data.name;
             console.log("NNName for Id = " + $scope.nameForId);})
         .then(function(){
-            if($scope.name === $scope.nameForId) {
+            if($scope.name === $scope.nameForId) { // user owner
                 $http.get('/images')
                     .then(res => {
-                        $scope.images = [];
-                        res.data.forEach(img => {$scope.images.push({url: img.url})});
+                        $scope.images = res.data;
                     })
                     .catch(err => console.log(err));
             }
@@ -55,53 +77,6 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         
     
     
-    
-    
-    
-    
-    
-    
-    // if(userOwnerF()){
-    //     console.log("User Owner=========================");
-    //     $http.get('/images')
-    //     .then(res => {
-    //         $scope.images = [];
-    //         res.data.forEach(img => {$scope.images.push({url: img.url})});
-            
-    //         // images => {
-    //         // $scope.images = images.data;
-    //         // images.data.forEach(img => {
-    //             // $scope.images.push({url: img})
-    //             // debugger;
-    //             console.log("$scope.images0 = " + $scope.images);
-    //             console.log($scope.images.length);
-    //             // debugger;
-    //         // }
-    //         // )
-    //     // }
-    //      } )
-    //     .catch(err => console.log(err));
-    //     console.log("$scope.images = " + $scope.images);
-    // };
-// I borrowed the code above the line from the controller home.js
-    
-    
-    
-    
-    $scope.$watch('file', function () {
-        if ($scope.file != null) {
-            var body = document.querySelector('body');// we find the body selector
-            angular.element(body).css('cursor', 'progress');
-            Upload.upload({ url: '/image', data: { image: $scope.file } })
-                .then(res => {
-                    if (res.status = 200) {
-                        $scope.images.push({url: res.data});
-                        angular.element(body).css('cursor', 'default');
-                    }
-                });
-        }
-    });
-
 
     $scope.openModal = function (img) {
         var modalInstance = $uibModal.open({
@@ -169,8 +144,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
     $scope.deletePicture = function(image, index){
         console.log("start");
+        // debugger;
         var body = document.querySelector('body');// we find the body selector
         angular.element(body).css('cursor', 'progress');
+        // debugger;
         $http.delete('/image/' + image._id)
             .then(res => {
                 $scope.images.splice(index, 1);
