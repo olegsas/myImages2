@@ -49,6 +49,7 @@ module.exports = function (app) {
     app.get('/getUsernameForId/:id', getUsernameForId);
     app.get('/getIdFromSession', getIdFromSession);
     app.get('/getUserProfileForId/:id', getUserProfileForId);
+    app.post('/updateProfileForId/:id', updateProfileForId);
     
 }
 
@@ -176,6 +177,11 @@ function getUserProfileForId (request, response) {
         }
     })
 
+};
+
+function updateProfileForId (request, response) {
+    const id = request.params.id; // id for our user
+    
 };
 
 

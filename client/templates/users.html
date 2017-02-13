@@ -16,7 +16,7 @@
             <div ng-show = "userAdmin()">
             <form  name = "myForm">
                 <label>Change the public/private profile. Public:
-                    <input type = "checkbox" ng-model = "publicForId" >  <!--ng-change = "update()">      -->
+                    <input type = "checkbox" ng-model = "publicForId" ng-change = "updateForId()">
                 </label><br/>
                 <tt>your profile is
                     <span ng-if = "showPublicForId()">public</span>

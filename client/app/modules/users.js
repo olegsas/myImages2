@@ -108,6 +108,16 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
          
         };
 
+        $scope.updateForId = function() {
+            // update user checkbox by Admin
+            $http.post('/updateProfileForId/' + $scope.stateUser_id, {public: $scope.publicForId})
+                .then(public => {
+                    console.log('+++');
+                    console.log("public.data.public = "+public.data.public);
+                    $scope.publicForId = public.data.public;
+                })
+        };
+
         // we use this function from the example
         $scope.openLightboxModal = function (index) {
             Lightbox.openModal($scope.images, index);
