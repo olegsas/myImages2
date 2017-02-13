@@ -40,11 +40,11 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             $scope.nameForId = nameForId.data.name;
             console.log("NNName for Id = " + $scope.nameForId);})
         .then(function(){
-            if($scope.name === $scope.nameForId) {
+            if($scope.name === $scope.nameForId) { // user owner
                 $http.get('/images')
                     .then(res => {
                         $scope.images = [];
-                        res.data.forEach(img => {$scope.images.push({url: img.url})});
+                        res.data.forEach(img => {$scope.images.push({url: img})});
                     })
                     .catch(err => console.log(err));
             }
@@ -53,40 +53,6 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         });
         
         
-    
-    
-    
-    
-    
-    
-    
-    
-    // if(userOwnerF()){
-    //     console.log("User Owner=========================");
-    //     $http.get('/images')
-    //     .then(res => {
-    //         $scope.images = [];
-    //         res.data.forEach(img => {$scope.images.push({url: img.url})});
-            
-    //         // images => {
-    //         // $scope.images = images.data;
-    //         // images.data.forEach(img => {
-    //             // $scope.images.push({url: img})
-    //             // debugger;
-    //             console.log("$scope.images0 = " + $scope.images);
-    //             console.log($scope.images.length);
-    //             // debugger;
-    //         // }
-    //         // )
-    //     // }
-    //      } )
-    //     .catch(err => console.log(err));
-    //     console.log("$scope.images = " + $scope.images);
-    // };
-// I borrowed the code above the line from the controller home.js
-    
-    
-    
     
     $scope.$watch('file', function () {
         if ($scope.file != null) {
@@ -171,7 +137,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         console.log("start");
         var body = document.querySelector('body');// we find the body selector
         angular.element(body).css('cursor', 'progress');
-        $http.delete('/image/' + image._id)
+        debugger;
+        $http.delete('/image/' + image.url._id)
             .then(res => {
                 $scope.images.splice(index, 1);
                 angular.element(body).css('cursor', 'default');

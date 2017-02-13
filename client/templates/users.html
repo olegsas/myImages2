@@ -29,13 +29,12 @@
         <div class = "col-sm-9 col-9" style = "border: 1px solid lightgray; border-radius: 5px">
             <div ng-show = "userOwner()" class = "jumbotron row">
                 <h4>name for Id {{nameForId}}</h4>
-                <h4> debug user owner</h4>
                 <h3>{{images.length}} картинки</h3>
                 <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
-                    <button class = "close myPictureClose" ng-if = userOwnerOrAdmin() ng-click = "deletePicture(image, $index)">x</button>
+                    <button class = "close myPictureClose" ng-if = userOwner() ng-click = "deletePicture(image, $index)">x</button>
                         <a title = "Image" href = "#">
                         <a ng-click="openLightboxModal($index)">
-                            <img class = "thumbnail img-responsive" ng-src = {{image.url}}>
+                            <img class = "thumbnail img-responsive" ng-src = {{image.url.url}}>
                         </a>
                         </a>
                 </div>
