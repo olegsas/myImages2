@@ -181,7 +181,19 @@ function getUserProfileForId (request, response) {
 
 function updateProfileForId (request, response) {
     const id = request.params.id; // id for our user
-    
+    User.update({
+        "_id": id
+    },{
+        "public": request.body.public
+    }, function(err, result){
+        if(err){
+            response.status(404);
+        };
+        if(result){
+            response.status(200).json({public: request.body.public})
+        };
+    });
+
 };
 
 
