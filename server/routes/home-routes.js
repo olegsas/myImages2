@@ -48,6 +48,8 @@ module.exports = function (app) {
     app.get('/users/:id', getPicturesForUser);
     app.get('/getUsernameForId/:id', getUsernameForId);
     app.get('/getIdFromSession', getIdFromSession);
+    app.get('/getUserProfileForId/:id', getUserProfileForId);
+    app.post('/updateProfileForId/:id', updateProfileForId);
     
 }
 
@@ -163,59 +165,36 @@ function getUsersUser (request, response) {
     });
     
 };
-// get public users
 
-// function getUsersUser (request, response) {
-//     console.log("Userrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-//     // we need public users and this user
-//     const users = [];
-//     const id = request.session._id; // name of our user
-//     User.find({'_id': id}, function (err, docs) {
-//         docs.forEach(e => users.push(e));
-//         if(users[0]){
-//             if('_doc' in users[0]){
-//                 if('public' in users[0]._doc){
-//                     var user = users[0]._doc.public;
-//                     console.log("ispublic==========" + user);
-//                     if(user){
-//                         users.pop();
-//                     }
-//                 }
-//             }
-//         }
-// response.status(200).json(users);    
-// });
+function getUserProfileForId (request, response) {
+    const id = request.params.id;// id for our user
+    User.findOne({_id: id}, function(err, result){
+        if(err){
+            res.status(404);
+        }
+        if(result){
+            response.status(200).send({public: result._doc.public});
+        }
+    })
 
-    
-// };
-    
-    // console.log("sess = " + sess);
-    // if('session' in request){
-    //     User.find({public: true}, function (err, docs) {
-    //         // console.log("docs = " + docs);
-    //         // console.log("docs local name = " + docs[1].local.name);
-    //         // docs.forEach(e => console.log("e= " + e.local.name));
-    //         docs.forEach(e => users.push(e));
-    //         // users.push(docs[0].local.name);
-    //         // users.push(docs[1].local.name);
-    //         // console.log("after push = " + users[0]);
-    //         response.status(200).json(users);
-    //     })
-    // } else {
-    //     response.status(200)
-    // }
+};
 
-    // if('session' in request){
-    //     if('_id' in request.session){
-    //         console.log("registered");
-    //         response.status(200);
-    //     } else {
-    //         console.log("anonim");
-    //         response.status(200);
-    //     }
-    // } else{
-    //     console.log("anonim");
-    //     response.status(200);
-    // }
+function updateProfileForId (request, response) {
+    const id = request.params.id; // id for our user
+    User.update({
+        "_id": id
+    },{
+        "public": request.body.public
+    }, function(err, result){
+        if(err){
+            response.status(404);
+        };
+        if(result){
+            response.status(200).json({public: request.body.public})
+        };
+    });
+
+};
+
 
 

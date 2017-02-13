@@ -1,7 +1,7 @@
 <div ng-controller = "usersCtrl">
     <div class = "row">
         <div class = "col-sm-3 col-3" style = "border: 2px solid black">
-            <h4>name for id {{nameForId}}</h4>
+            <h4>{{nameForId}}</h4>
             <div ng-show = "userOwner()">
             <form  name = "myForm">
                 <label>Change the public/private profile. Public:
@@ -14,7 +14,15 @@
             </form>
             </div>
             <div ng-show = "userAdmin()">
-                <h2>Admin</h2>
+            <form  name = "myForm">
+                <label>Change the public/private profile. Public:
+                    <input type = "checkbox" ng-model = "publicForId" ng-change = "updateForId()">
+                </label><br/>
+                <tt>your profile is
+                    <span ng-if = "showPublicForId()">public</span>
+                    <span ng-if = "!showPublicForId()">private</span>
+                </tt><br/>
+            </form>
             </div>
 
         </div>
