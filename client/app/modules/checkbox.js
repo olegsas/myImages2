@@ -5,6 +5,9 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox'])
     $scope.images = [];
 
     $scope.$watch('file', function () {
+        console.log("$scope.file===================== "+$scope.file);
+        console.log($scope.file);
+        debugger;
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
