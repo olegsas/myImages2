@@ -38,17 +38,17 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     $scope.$watch('file', function () {
         console.log("$scope.file= " + $scope.file);
         console.log($scope.file);
-        debugger;
+        // debugger;
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
             Upload.upload({ url: '/image', data: { image: $scope.file } })
                 .then(res => {
                     if (res.status = 200) {
-                        debugger;
+                        // debugger;
                         $scope.images.push({url: res.data});
                         console.log($scope.images);
-                        debugger;
+                        // debugger;
                         angular.element(body).css('cursor', 'default');
                     }
                 });
@@ -144,10 +144,11 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
 
     $scope.deletePicture = function(image, index){
         console.log("start");
+        // debugger;
         var body = document.querySelector('body');// we find the body selector
         angular.element(body).css('cursor', 'progress');
-        debugger;
-        $http.delete('/image/' + image.url._id)
+        // debugger;
+        $http.delete('/image/' + image._id)
             .then(res => {
                 $scope.images.splice(index, 1);
                 angular.element(body).css('cursor', 'default');
