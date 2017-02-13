@@ -57,6 +57,7 @@ function getImages(request, response) {
     const images = [];
     Image.find({ '_owner': request.session._id }, function (err, docs) {
         docs.forEach(e => images.push(e))
+        console.log(images);
         response.status(200).json(images)
     })
 };
