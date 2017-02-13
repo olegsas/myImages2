@@ -5,7 +5,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     $scope.stateUser_id = $stateParams.user_id;
     //console.log(Upload.upload);
     $scope.methods = {};
-    $scope.images = [];
+    // $scope.images = [];
     $scope.imagesForUsers = [];
 
     function nameJwt() {
@@ -30,30 +30,59 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         }
     };
 
-    function userOwnerF() {
-        return ($scope.name === $scope.nameForId);
-    }
+    // function userOwnerF() {
+    //     return ($scope.name === $scope.nameForId);
+    // }
 
-    if(userOwnerF()){
-        console.log("User Owner=========================");
-        $http.get('/images')
-        .then(function(res, err){
-            res.data.forEach(img => {$scope.images.push({url: img.url})});
+    $http.get('/getUsernameForId/'+$scope.stateUser_id)
+        .then(nameForId => {    
+        	//debugger;
+            $scope.nameForId = nameForId.data.name;
+            console.log("NNName for Id = " + $scope.nameForId);})
+        .then(function(){
+            if($scope.name === $scope.nameForId) {
+                $http.get('/images')
+                    .then(res => {
+                        $scope.images = [];
+                        res.data.forEach(img => {$scope.images.push({url: img.url})});
+                    })
+                    .catch(err => console.log(err));
+            }
+
+
+        });
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    // if(userOwnerF()){
+    //     console.log("User Owner=========================");
+    //     $http.get('/images')
+    //     .then(res => {
+    //         $scope.images = [];
+    //         res.data.forEach(img => {$scope.images.push({url: img.url})});
             
-            // images => {
-            // $scope.images = images.data;
-            // images.data.forEach(img => {
-                // $scope.images.push({url: img})
-                // debugger;
-                console.log("$scope.images0 = " + $scope.images);
-                // debugger;
-            // }
-            // )
-        // }
-         } )
-        .catch(err => console.log(err));
-        console.log("$scope.images = " + $scope.images);
-    };
+    //         // images => {
+    //         // $scope.images = images.data;
+    //         // images.data.forEach(img => {
+    //             // $scope.images.push({url: img})
+    //             // debugger;
+    //             console.log("$scope.images0 = " + $scope.images);
+    //             console.log($scope.images.length);
+    //             // debugger;
+    //         // }
+    //         // )
+    //     // }
+    //      } )
+    //     .catch(err => console.log(err));
+    //     console.log("$scope.images = " + $scope.images);
+    // };
 // I borrowed the code above the line from the controller home.js
     
     
@@ -86,13 +115,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         
         
         
-    $http.get('/getUsernameForId/'+$scope.stateUser_id)
-        .then(nameForId => {    
-        	//debugger;
-            $scope.nameForId = nameForId.data.name;
-            console.log("NNName for Id = " + $scope.nameForId);
-        });
-        // we need to find username for this _id
+    
 
     $scope.name = nameJwt();//
     console.log("scope.name.jwt = " + $scope.name);

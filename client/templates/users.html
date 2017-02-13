@@ -1,15 +1,15 @@
 <div ng-controller = "usersCtrl">
     <div class = "row">
         <div class = "col-sm-3 col-3" style = "border: 1px solid lightgray; border-radius: 5px">
-            <h4>{{nameForId}}</h4>
+            <h4>name for Id {{nameForId}}</h4>
             <div ng-show = "userOwner()">
             <form  name = "myForm">
                 <label>Change the public/private profile. Public:
                     <input type = "checkbox" ng-model = "public" ng-change = "update()">
                 </label><br/>
                 <tt>your profile is  
-                    <!--<span ng-if = "showPublic()">public</span>-->
-                    <!--<span ng-if = "!showPublic()">private</span>-->
+                    <span ng-if = "showPublic()">public</span>
+                    <span ng-if = "!showPublic()">private</span>
                     </tt><br/>
             </form>
             </div>
@@ -19,8 +19,8 @@
                     <input type = "checkbox" ng-model = "publicForId" ng-change = "updateForId()">
                 </label><br/>
                 <tt>your profile is
-                    <!--<span ng-if = "showPublicForId()">public</span>-->
-                    <!--<span ng-if = "!showPublicForId()">private</span>-->
+                    <span ng-if = "showPublicForId()">public</span>
+                    <span ng-if = "!showPublicForId()">private</span>
                 </tt><br/>
             </form>
             </div>
@@ -28,10 +28,11 @@
         </div>
         <div class = "col-sm-9 col-9" style = "border: 1px solid lightgray; border-radius: 5px">
             <div ng-show = "userOwner()" class = "jumbotron row">
+                <h4>name for Id {{nameForId}}</h4>
                 <h4> debug user owner</h4>
                 <h3>{{images.length}} картинки</h3>
                 <div class = "col-lg-3 col-sm-4 col-xs-6" ng-repeat = "image in images">
-                    <!--<button class = "close myPictureClose" ng-if = userOwnerOrAdmin() ng-click = "deletePicture(image, $index)">x</button>-->
+                    <button class = "close myPictureClose" ng-if = userOwnerOrAdmin() ng-click = "deletePicture(image, $index)">x</button>
                         <a title = "Image" href = "#">
                         <a ng-click="openLightboxModal($index)">
                             <img class = "thumbnail img-responsive" ng-src = {{image.url}}>
@@ -41,14 +42,14 @@
             </div>
         
         
-            <!--<div ng-if = "userOwnerOrAdmin()" style="margin: 20px" >
+            <div ng-if = "userOwnerOrAdmin()" style="margin: 20px" >
                 <div ngf-drop ngf-select ng-model="file" class="drop-box" 
                     ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
                     accept="image/*" 
                     ngf-pattern="'image/*'">
                     Drop images here or click to upload
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>    
     
