@@ -37,7 +37,7 @@ angular.module('app.auth', ['angular-jwt'])
         var jwtFull = window.localStorage.getItem('jwt');
         if (jwtFull){
             var token = jwtHelper.decodeToken(jwtFull);
-            console.log("===============" + token.name);
+            // console.log("===============" + token.name);
             return token.name; // we have username logged-in
         } else {
             return null;

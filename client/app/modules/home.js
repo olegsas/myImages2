@@ -24,7 +24,7 @@ angular.module('app.home', ['ngFileUpload'])
         var jwtFull = window.localStorage.getItem('jwt');
         if (jwtFull){
             var token = jwtHelper.decodeToken(jwtFull);
-            console.log("===============" + token.name);
+            // console.log("===============" + token.name);
             return token.name; // we have username logged-in
         } else {
             return null;
@@ -35,7 +35,7 @@ angular.module('app.home', ['ngFileUpload'])
         var jwtFull = window.localStorage.getItem('jwt');
         if(jwtFull){
             var token = jwtHelper.decodeToken(jwtFull);
-            console.log("tokenAdmin = " + token.isAdmin);
+            // console.log("tokenAdmin = " + token.isAdmin);
             return token.isAdmin; // if this user is admin
         } else {
             return null;
@@ -47,7 +47,7 @@ angular.module('app.home', ['ngFileUpload'])
     if(!existJwt()){
     $http.get('/users/anonim')
         .then(users => {
-            console.log("We get users==============================");
+            // console.log("We get users==============================");
             users.data.forEach(users => {
                 $scope.users.push(users)
             });
@@ -56,7 +56,7 @@ angular.module('app.home', ['ngFileUpload'])
     } else {
         if(adminJwt()){ 
             // admin logged in
-            console.log("Admin loggggggggggggggggggggg");
+            // console.log("Admin loggggggggggggggggggggg");
             $http.get('/users/admin')
                 .then(users => {
                     users.data.forEach(users => {
@@ -70,7 +70,7 @@ angular.module('app.home', ['ngFileUpload'])
                 });
         } else {
             // user logged in
-            console.log("userrrrrrrrrrrrrrr log in");
+            // console.log("userrrrrrrrrrrrrrr log in");
             $http.get('/users/user')
                 .then(users => {
                     users.data.forEach(users => {
@@ -81,7 +81,7 @@ angular.module('app.home', ['ngFileUpload'])
             // we has the user if he is private
             $http.get('/users/anonim')
         .then(users => {
-            console.log("We get users==============================");
+            // console.log("We get users==============================");
             users.data.forEach(users => {
                 $scope.users.push(users)
             });

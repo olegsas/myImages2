@@ -15,8 +15,8 @@ angular.module('app', [
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',
     function ($rootScope, $state, $stateParams, AuthService) {
         var user_id = $stateParams.user_id; // getting username
-        console.log($stateParams);
-        console.log("user_id = " + user_id);
+        // console.log($stateParams);
+        // console.log("user_id = " + user_id);
         $rootScope.$on("$stateChangeStart", async function (event, toState, toParams, fromState, fromParams) {
             if (toState.authenticate && !AuthService.isAuthenticated()) {
                 // User isn’t authenticated
