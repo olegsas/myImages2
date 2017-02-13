@@ -44,9 +44,9 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             // $scope.images = images.data;
             // images.data.forEach(img => {
                 // $scope.images.push({url: img})
-                debugger;
+                // debugger;
                 console.log("$scope.images0 = " + $scope.images);
-                debugger;
+                // debugger;
             // }
             // )
         // }
