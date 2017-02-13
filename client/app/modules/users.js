@@ -34,6 +34,26 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     //     return ($scope.name === $scope.nameForId);
     // }
 
+    
+    $scope.$watch('file', function () {
+        console.log("$scope.file= " + $scope.file);
+        console.log($scope.file);
+        debugger;
+        if ($scope.file != null) {
+            var body = document.querySelector('body');// we find the body selector
+            angular.element(body).css('cursor', 'progress');
+            Upload.upload({ url: '/image', data: { image: $scope.file } })
+                .then(res => {
+                    if (res.status = 200) {
+                        $scope.images.push({url: res.data});
+                        angular.element(body).css('cursor', 'default');
+                    }
+                });
+        }
+    });
+
+    
+    
     $http.get('/getUsernameForId/'+$scope.stateUser_id)
         .then(nameForId => {    
         	//debugger;
@@ -54,22 +74,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         
         
     
-    $scope.$watch('file', function () {
-        console.log("$scope.file= " + $scope.file);
-        debugger;
-        if ($scope.file != null) {
-            var body = document.querySelector('body');// we find the body selector
-            angular.element(body).css('cursor', 'progress');
-            Upload.upload({ url: '/image', data: { image: $scope.file } })
-                .then(res => {
-                    if (res.status = 200) {
-                        $scope.images.push({url: res.data});
-                        angular.element(body).css('cursor', 'default');
-                    }
-                });
-        }
-    });
-
+    
 
     $scope.openModal = function (img) {
         var modalInstance = $uibModal.open({
