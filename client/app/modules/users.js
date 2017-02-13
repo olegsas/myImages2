@@ -55,6 +55,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         
     
     $scope.$watch('file', function () {
+        console.log("$scope.file= " + $scope.file);
+        debugger;
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
