@@ -37,13 +37,22 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     if(userOwnerF()){
         console.log("User Owner=========================");
         $http.get('/images')
-        .then(images => {
-            $scope.images = images.data;
+        .then(function(res, err){
+            res.data.forEach(img => {$scope.images.push({url: img.url})});
+            
+            // images => {
+            // $scope.images = images.data;
             // images.data.forEach(img => {
-            //     $scope.images.push({url: img})
-            // })
-        })
+                // $scope.images.push({url: img})
+                debugger;
+                console.log("$scope.images0 = " + $scope.images);
+                debugger;
+            // }
+            // )
+        // }
+         } )
         .catch(err => console.log(err));
+        console.log("$scope.images = " + $scope.images);
     };
 // I borrowed the code above the line from the controller home.js
     
