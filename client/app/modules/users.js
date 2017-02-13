@@ -67,6 +67,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
                 $http.get('/images')
                     .then(res => {
                         $scope.images = [];
+                        debugger;
                         res.data.forEach(img => {$scope.images.push({url: img})});
                     })
                     .catch(err => console.log(err));
