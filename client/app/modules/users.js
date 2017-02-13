@@ -45,7 +45,10 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             Upload.upload({ url: '/image', data: { image: $scope.file } })
                 .then(res => {
                     if (res.status = 200) {
+                        debugger;
                         $scope.images.push({url: res.data});
+                        console.log($scope.images);
+                        debugger;
                         angular.element(body).css('cursor', 'default');
                     }
                 });
