@@ -34,7 +34,7 @@
                     <button class = "close myPictureClose" ng-if = userOwner() ng-click = "deletePicture(image, $index)">x</button>
                         <a title = "Image" href = "#">
                         <a ng-click="openLightboxModal($index)">
-                            <img class = "thumbnail img-responsive" ng-src = {{image.url.url}}>
+                            <img class = "thumbnail img-responsive" ng-src = {{image.url}}>
                         </a>
                         </a>
                 </div>

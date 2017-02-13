@@ -5,7 +5,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     $scope.stateUser_id = $stateParams.user_id;
     //console.log(Upload.upload);
     $scope.methods = {};
-    // $scope.images = [];
+    $scope.images = [];
     $scope.imagesForUsers = [];
 
     function nameJwt() {
@@ -66,9 +66,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             if($scope.name === $scope.nameForId) { // user owner
                 $http.get('/images')
                     .then(res => {
-                        $scope.images = [];
-                        debugger;
-                        res.data.forEach(img => {$scope.images.push({url: img})});
+                        $scope.images = res.data;
                     })
                     .catch(err => console.log(err));
             }
