@@ -28,8 +28,8 @@
         </div>
         <div class = "col-sm-9 col-9" style = "border: 1px solid lightgray; border-radius: 5px">
             <div ng-if = "userOwner()" class = "jumbotron row">
-                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
-                    <div style = "position: relative; height: 250px; width: 100%; border: 1px solid green">
+                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid transparent" ng-repeat = "image in images">
+                    <div style = "position: relative; height: 250px; width: 100%; border: 1px solid transparent">
                     <button class = "close myPictureClose" ng-if = userOwner() ng-click = "deletePicture(image, $index)">x</button>
                         <a ng-click="openLightboxModal($index)">
                             <img class = "thumbnail img-responsive" style = "height: auto; width: auto" ng-src = {{image.url}}>
@@ -38,8 +38,8 @@
                 </div>
             </div>
             <div ng-if = "!userOwnerOrAdmin()" class = "jumbotron row">
-                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
-                        <div style = "position: relative; height: 250px; width: 100%; border: 1px solid green">
+                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid transparent" ng-repeat = "image in images">
+                        <div style = "position: relative; height: 250px; width: 100%; border: 1px solid transparent">
                         <a ng-click="openLightboxModal($index)">
                             <img class = "thumbnail img-responsive" style = "height: auto; width: auto" ng-src = {{image.url}}>
                         </a>
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div ng-show = "userAdmin()" class = "jumbotron row">
-                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
-                    <div style = "position: relative; height: 250px; width: 100%; border: 1px solid green">
+                <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid transparent" ng-repeat = "image in images">
+                    <div style = "position: relative; height: 250px; width: 100%; border: 1px solid transparent">
                     <button class = "close myPictureClose" ng-if = userAdmin() ng-click = "deletePictureByAdmin(image, $index)">x</button>
                         <a ng-click="openLightboxModal($index)">
                             <img class = "thumbnail img-responsive" style = "height: auto; width: auto" ng-src = {{image.url}}>
