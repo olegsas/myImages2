@@ -39,13 +39,14 @@ function uploadImage(req, res, next) {// all function for debug
 
 
 module.exports = function (app) {
-    app.get('/images', getImages);
+    app.get('/images', getImages);// for the owner of the images
+    app.get('/imagesId/:id', getImagesForId); // images for the guest
     app.post('/image', multipartyMiddleware, uploadImage);
     app.delete('/image/:id', deleteImage);
-    app.get('/users/anonim', getUsersAnonim);
+    app.get('/users/anonim', getUsersAnonim);// at first we use /users/anonim special requests
     app.get('/users/admin', getUsersAdmin);
     app.get('/users/user', getUsersUser);
-    app.get('/users/:id', getPicturesForUser);
+    app.get('/users/:id', getPicturesForUser);// then we have general request at last
     app.get('/getUsernameForId/:id', getUsernameForId);
     app.get('/getIdFromSession', getIdFromSession);
     app.get('/getUserProfileForId/:id', getUserProfileForId);
@@ -56,6 +57,16 @@ module.exports = function (app) {
 function getImages(request, response) {
     const images = [];
     Image.find({ '_owner': request.session._id }, function (err, docs) {
+        docs.forEach(e => images.push(e))
+        console.log(images);
+        response.status(200).json(images)
+    })
+};
+
+function getImagesForId(request, response) {
+    const images = [];
+    const id = request.params.id;
+    Image.find({'_owner': id}, function (err, docs) {
         docs.forEach(e => images.push(e))
         console.log(images);
         response.status(200).json(images)
