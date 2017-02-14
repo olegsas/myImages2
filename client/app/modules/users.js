@@ -71,6 +71,13 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
                         $scope.images = res.data;
                     }).catch(err => console.log(err));
             }
+        }).then(function(){
+            if($scope.name === "admin"){
+                $http.get('/imagesId/' + $scope.stateUser_id)
+                    .then(res => {
+                        $scope.images = res.data;
+                    }).catch(err => console.log(err));
+            }
         });
         
         
@@ -155,6 +162,18 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             .catch(err => {});
         console.log("finish");
         // angular.element(body).css('cursor', 'default');
+    };
+
+    $scope.deletePictureByAdmin = function(image, index) {
+        console.log("Delete picture By Admin======================");
+        var body = document.querySelector('body');
+        angular.element(body).css('cursor', 'progress');
+        $http.delete('/image/' + image._id)
+            .then(res => {
+                $scope.images.splice(index, 1);
+                angular.element(body).css('cursor', 'default');
+            }).catch(err =>{});
+
     };
 
 
