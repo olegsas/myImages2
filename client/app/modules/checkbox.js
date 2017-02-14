@@ -1,6 +1,5 @@
 angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'])
     .controller('checkboxCtrl', function($scope, $http, Upload, Lightbox, $uibModal, $stateParams) {
-       //console.log(Upload.upload);
         $scope.methods = {};
     $scope.images = [];
 
@@ -37,24 +36,17 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
         
         $http.get('/getUserName')
         .then(name => {
-            console.log("================username===================");
-             console.log("name.data = " + name.data.name);
             $scope.name = name.data.name;
         });
         
         $http.get('/getUserProfile')
         .then(public => {
-            // console.log("public.data  =  " + public.data.public);
             $scope.public = public.data.public;
         });
 
         $scope.update = function() {
-        // console.log('====');
-        //  console.log('$scope.public = ' + $scope.public);
          $http.post('/updateProfile', {public:$scope.public})
          .then(public => {
-            // console.log('+++');
-            // console.log("public.data.public = "+public.data.public);
              $scope.public = public.data.public;
          })          
          
@@ -63,22 +55,17 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
         // we use this function from the example
         $scope.openLightboxModal = function (index) {
             Lightbox.openModal($scope.images, index);
-            // var obj = Lightbox.openModal($scope.images, index)
-            // console.log(obj)
         };
 
         $scope.deletePicture = function(image, index){
-            console.log("start");
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
-            console.log("image.id = " + image._id);
             $http.delete('/image/' + image._id)
                 .then(res => {
                     $scope.images.splice(index, 1);
                     angular.element(body).css('cursor', 'default');
                 })
                 .catch(err => {});
-            console.log("finish");
             // angular.element(body).css('cursor', 'default');
         };
 
