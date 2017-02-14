@@ -3,7 +3,6 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
     console.log("$stateParams.user_id = "+$stateParams.user_id);
     $rootScope.userr = $stateParams.user_id;
     $scope.stateUser_id = $stateParams.user_id;
-    //console.log(Upload.upload);
     $scope.methods = {};
     $scope.images = [];
     $scope.imagesForUsers = [];
@@ -29,10 +28,6 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             return null;
         }
     };
-
-    // function userOwnerF() {
-    //     return ($scope.name === $scope.nameForId);
-    // }
 
     
     $scope.$watch('file', function () {
@@ -67,11 +62,15 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
                 $http.get('/images')
                     .then(res => {
                         $scope.images = res.data;
-                    })
-                    .catch(err => console.log(err));
+                    }).catch(err => console.log(err));
             }
-
-
+        }).then(function(){
+            if((!!$scope.name) || ($scope.name !== $scope.nameForId)) { // guest or anonim user
+                $http.get('/imagesId/' + $scope.stateUser_id)
+                    .then(res => {
+                        $scope.images = res.data;
+                    }).catch(err => console.log(err));
+            }
         });
         
         
