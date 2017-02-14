@@ -21,6 +21,7 @@ function uploadImage(req, res, next) {// all function for debug
             cloudinary.uploader.upload(req.files.image.path, function (result) {
                 if (result.url) {
                     // req.imageLink = result.url;
+                    // here we can assign the owner of the picture for the database!!!
                     var image = new Image();
                     image.url = result.url;
                     image._owner = req.session._id;
@@ -35,13 +36,14 @@ function uploadImage(req, res, next) {// all function for debug
         } else {
             next();
         }
-    };
+};
 
 
 module.exports = function (app) {
     app.get('/images', getImages);// for the owner of the images
     app.get('/imagesId/:id', getImagesForId); // images for the guest
     app.post('/image', multipartyMiddleware, uploadImage);
+    app.post('/imageUploadAdmin', multipartyMiddleware, imageUploadAdmin);
     app.delete('/image/:id', deleteImage);
     app.get('/users/anonim', getUsersAnonim);// at first we use /users/anonim special requests
     app.get('/users/admin', getUsersAdmin);
@@ -52,7 +54,58 @@ module.exports = function (app) {
     app.get('/getUserProfileForId/:id', getUserProfileForId);
     app.post('/updateProfileForId/:id', updateProfileForId);
     
-}
+};
+function imageUploadAdmin(req, res, next) {
+    const user_id = req.body.user_id;
+    console.log("Upload req.files = = " + req.files);
+    if(req.files.image) {
+        cloudinary.uploader.upload(req.files.image.path, function(result) {
+            if(result.url) {
+                var image = new Image();
+                image.url = result.url;
+                image._owner = user_id;
+                image.public_id = result.public_id;
+                image.save((err, response) => {
+                    res.status(201).json(result.url)
+                })
+            } else {
+                res.json(error);
+            }
+        });
+    } else {
+        next();
+    }
+    
+    
+    
+};
+
+// 
+function uploadImage(req, res, next) {// all function for debug
+        console.log("Upload req.files=" + req.files);
+        if (req.files.image) {
+            cloudinary.uploader.upload(req.files.image.path, function (result) {
+                if (result.url) {
+                    // req.imageLink = result.url;
+                    // here we can assign the owner of the picture for the database!!!
+                    var image = new Image();
+                    image.url = result.url;
+                    image._owner = req.session._id;
+                    image.public_id = result.public_id;
+                    image.save((err, response) => {
+                        res.status(201).json(result.url)
+                    })
+                } else {
+                    res.json(error);
+                }
+            });
+        } else {
+            next();
+        }
+};
+// 
+
+
 
 function getImages(request, response) {
     const images = [];
