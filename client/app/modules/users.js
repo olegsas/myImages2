@@ -54,7 +54,7 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
             } else {
                 // start upload
                 debugger;
-                Upload.upload({ url: '/imageUploadAdmin', data: { 'image': $scope.file, 'username': $scope.stateUser_id}})
+                Upload.upload({ url: '/imageUploadAdmin', data: { 'image': $scope.file, 'user_id': $scope.stateUser_id}})
                     .then(res => {
                         if (res.status = 200) {
                             debugger;

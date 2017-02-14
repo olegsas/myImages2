@@ -36,7 +36,7 @@ function uploadImage(req, res, next) {// all function for debug
         } else {
             next();
         }
-    };
+};
 
 
 module.exports = function (app) {
@@ -56,10 +56,54 @@ module.exports = function (app) {
     
 };
 function imageUploadAdmin(req, res, next) {
-    const bbb = req;
+    const user_id = req.body.user_id;
     console.log("Upload req.files = = " + req.files);
-    res.status(200);
+    if(req.files.image) {
+        cloudinary.uploader.upload(req.files.image.path, function(result) {
+            if(result.url) {
+                var image = new Image();
+                image.url = result.url;
+                image._owner = user_id;
+                image.public_id = result.public_id;
+                image.save((err, response) => {
+                    res.status(201).json(result.url)
+                })
+            } else {
+                res.json(error);
+            }
+        });
+    } else {
+        next();
+    }
+    
+    
+    
 };
+
+// 
+function uploadImage(req, res, next) {// all function for debug
+        console.log("Upload req.files=" + req.files);
+        if (req.files.image) {
+            cloudinary.uploader.upload(req.files.image.path, function (result) {
+                if (result.url) {
+                    // req.imageLink = result.url;
+                    // here we can assign the owner of the picture for the database!!!
+                    var image = new Image();
+                    image.url = result.url;
+                    image._owner = req.session._id;
+                    image.public_id = result.public_id;
+                    image.save((err, response) => {
+                        res.status(201).json(result.url)
+                    })
+                } else {
+                    res.json(error);
+                }
+            });
+        } else {
+            next();
+        }
+};
+// 
 
 
 
