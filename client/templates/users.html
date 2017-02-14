@@ -1,7 +1,7 @@
 <div ng-controller = "usersCtrl">
     <div class = "row">
         <div class = "col-sm-3 col-3" style = "border: 1px solid lightgray; border-radius: 5px">
-            <h4>name for Id {{nameForId}}</h4>
+            <h4>{{nameForId}}</h4>
             <div ng-show = "userOwner()">
             <form  name = "myForm">
                 <label>Change the public/private profile. Public:
@@ -28,9 +28,6 @@
         </div>
         <div class = "col-sm-9 col-9" style = "border: 1px solid lightgray; border-radius: 5px">
             <div ng-if = "userOwner()" class = "jumbotron row">
-                <h4>name for Id {{nameForId}}</h4>
-                <h4>name {{name}}</h4>
-                <h3>{{images.length}} картинки</h3>
                 <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
                     <button class = "close myPictureClose" ng-if = userOwner() ng-click = "deletePicture(image, $index)">x</button>
                         <a title = "Image" href = "#">
@@ -41,10 +38,6 @@
                 </div>
             </div>
             <div ng-if = "!userOwnerOrAdmin()" class = "jumbotron row">
-                <h4>name for Id {{nameForId}}</h4>
-                <h4>name {{name}}</h4>
-                <h3>{{images.length}} картинки</h3>
-                <h3>GUEST</h3>
                 <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
                         <a title = "Image" href = "#">
                         <a ng-click="openLightboxModal($index)">
@@ -54,9 +47,6 @@
                 </div>
             </div>
             <div ng-show = "userAdmin()" class = "jumbotron row">
-                <h4>name for Id {{nameForId}}</h4>
-                <h3>{{images.length}} картинки</h3>
-                <h3>user Admin </h3>
                 <div class = "col-lg-3 col-sm-4 col-xs-6" style = "border: 1px solid red" ng-repeat = "image in images">
                     <button class = "close myPictureClose" ng-if = userAdmin() ng-click = "deletePictureByAdmin(image, $index)">x</button>
                         <a title = "Image" href = "#">
