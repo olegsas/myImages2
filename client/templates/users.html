@@ -53,7 +53,6 @@
                         </a>
                 </div>
             </div>
-            <!---->
             <div ng-show = "userAdmin()" class = "jumbotron row">
                 <h4>name for Id {{nameForId}}</h4>
                 <h3>{{images.length}} картинки</h3>
@@ -67,12 +66,6 @@
                         </a>
                 </div>
             </div>
-
-            <!---->
-
-
-
-        
         
             <div ng-show = "userOwner()" style="margin: 20px" >
                 <div ngf-drop ngf-select ng-model="file" class="drop-box" 
@@ -82,6 +75,17 @@
                     Drop images here or click to upload
                 </div>
             </div>
+            <!---->
+            <div ng-show = "userAdmin()" style="margin: 20px" >
+                <div ngf-drop ngf-select ng-model="file" class="drop-box" 
+                    ngf-drag-over-class="'dragover'" ngf-allow-dir="true"
+                    accept="image/*" 
+                    ngf-pattern="'image/*'">
+                    Drop images here or click to upload
+                </div>
+            </div>
+            <!---->
+
         </div>
     </div>    
     

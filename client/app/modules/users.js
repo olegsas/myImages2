@@ -37,16 +37,33 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         if ($scope.file != null) {
             var body = document.querySelector('body');// we find the body selector
             angular.element(body).css('cursor', 'progress');
-            Upload.upload({ url: '/image', data: { image: $scope.file } })
-                .then(res => {
-                    if (res.status = 200) {
-                        // debugger;
-                        $scope.images.push({url: res.data});
-                        console.log($scope.images);
-                        // debugger;
-                        angular.element(body).css('cursor', 'default');
-                    }
-                });
+            console.log("$scope.name = = " + $scope.name);
+            console.log("$scope.nameForId = =" + $scope.nameForId);
+            if($scope.name !== "admin") {
+                // start upload
+                Upload.upload({ url: '/image', data: { image: $scope.file } })
+                    .then(res => {
+                        if (res.status = 200) {
+                            // debugger;
+                            $scope.images.push({url: res.data});
+                            console.log($scope.images);
+                            // debugger;
+                            angular.element(body).css('cursor', 'default');
+                        }
+                    });
+            } else {
+                // start upload
+                debugger;
+                Upload.upload({ url: '/imageUploadAdmin', data: { 'image': $scope.file, 'username': $scope.stateUser_id}})
+                    .then(res => {
+                        if (res.status = 200) {
+                            debugger;
+                            $scope.images.push({url: res.data});
+                            angular.element(body).css('cursor', 'default');
+                        }
+                    });
+                // finish upload
+            }
         }
     });
 
