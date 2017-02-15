@@ -1,6 +1,6 @@
 angular.module('app.auth', ['angular-jwt'])
 
-.factory('AuthService', function ($http) {
+.factory('AuthService', function ($http, $rootScope) {
     const auth = {};
 
     auth.register = async function (email, name, password) {
@@ -14,13 +14,17 @@ angular.module('app.auth', ['angular-jwt'])
 
     auth.login = async function (email, password) {
         // debugger;
-        let res = await $http.post('/login', {
-            email: email,
-            password: password
-        });
-        debugger;
-        console.log("res = " + res);
-        window.localStorage['jwt'] = angular.toJson(res.data.token)
+        try {
+            let res = await $http.post('/login', {
+                email: email,
+                password: password
+            });
+        window.localStorage['jwt'] = angular.toJson(res.data.token);
+    } catch(e) {
+            $rootScope.alert = e.data.message;
+        }
+
+        // window.localStorage['jwt'] = angular.toJson(res.data.token)
     }
 
     auth.isAuthenticated = function () {
