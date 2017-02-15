@@ -1,0 +1,22 @@
+{
+  "name": "my_pictures-client",
+  "description": "my_pictures",
+  "main": "app.js",
+  "authors": [
+    "Oleg"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/olegsas/myImages2",
+  "ignore": [
+    "**/.",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "^2.5.0",
+    "ng-file-upload": "^12.2.13",
+    "angular-ui-bootstrap": "^2.5.0",
+    "angular-file-upload": "^2.5.0"
+  }
+}
