@@ -4,12 +4,19 @@ angular.module('app.auth', ['angular-jwt'])
     const auth = {};
 
     auth.register = async function (email, name, password) {
-        let res = await $http.post('/register', {
-            email: email,
-            name: name,
-            password: password
-        })
-        window.localStorage['jwt'] = angular.toJson(res.data.token)
+        try {
+            let res = await $http.post('/register', {
+                email: email,
+                name: name,
+                password: password
+            })
+            window.localStorage['jwt'] = angular.toJson(res.data.token)
+        } catch(e){
+            $rootScope.regmessage = 'This e-mail is already taken';
+            $state.transitionTo('register');
+            $state.transitionTo('users');
+            $state.transitionTo('register');
+        }
     }
 
     auth.login = async function (email, password) {
@@ -64,12 +71,19 @@ angular.module('app.auth', ['angular-jwt'])
 
     $scope.register = async function() {
         await AuthService.register($scope.email, $scope.username, $scope.password);
+        if(nameJwt()){
         $state.transitionTo('home')
-    }
+        }
+    };
 
     $rootScope.alertF = function() {
         console.log("!!$rootScope.alert = " + !!$rootScope.alert)
         return !!$rootScope.alert;
 
+    };
+
+    $rootScope.regmessageF = function() {
+        console.log("!!$rootScope.regmessage = " + !!$rootScope.regmessage);
+        return !!$rootScope.regmessage;
     }
 })

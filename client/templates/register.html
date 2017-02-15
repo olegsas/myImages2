@@ -20,6 +20,7 @@
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Register</button>
             <a href ui-sref="login" class="btn btn-link">login</a>
+            <h4 ng-if = "regmessageF()" style = "color: red; font-weight: bold" >{{regmessage}}</h4>
         </div>
     </form>
 </div>
