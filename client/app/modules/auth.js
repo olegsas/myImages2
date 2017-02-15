@@ -77,13 +77,13 @@ angular.module('app.auth', ['angular-jwt'])
     };
 
     $rootScope.alertF = function() {
-        console.log("!!$rootScope.alert = " + !!$rootScope.alert)
+        // console.log("!!$rootScope.alert = " + !!$rootScope.alert)
         return !!$rootScope.alert;
 
     };
 
     $rootScope.regmessageF = function() {
-        console.log("!!$rootScope.regmessage = " + !!$rootScope.regmessage);
+        // console.log("!!$rootScope.regmessage = " + !!$rootScope.regmessage);
         return !!$rootScope.regmessage;
     }
 })

@@ -45,7 +45,6 @@ module.exports.login = function (req, res) {
 	passport.authenticate('local', function (err, user, info) {
 		var token;
 		if (err) {
-			console.log("= = = 1");
 			sendJSONresponse(res, 404, err);
 			return;
 		}
@@ -53,12 +52,10 @@ module.exports.login = function (req, res) {
 			token = user.generateJwt();
 			req.session._id = user._doc._id;
 			req.session.token = token;
-			console.log("= = = 2");
 			sendJSONresponse(res, 200, {
 				"token": token
 			});
 		} else {
-			console.log("= = = 3");
 			sendJSONresponse(res, 401, info);
 		}
 	})(req, res);
