@@ -62,21 +62,24 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
                 $http.get('/images')
                     .then(res => {
                         $scope.images = res.data;
-                    }).catch(err => console.log(err));
+                    });
+                    // .catch(err => console.log(err));
             }
         }).then(function(){
             if((!!$scope.name) || ($scope.name !== $scope.nameForId)) { // guest or anonim user
                 $http.get('/imagesId/' + $scope.stateUser_id)
                     .then(res => {
                         $scope.images = res.data;
-                    }).catch(err => console.log(err));
+                    });
+                    // .catch(err => console.log(err));
             }
         }).then(function(){
             if($scope.name === "admin"){
                 $http.get('/imagesId/' + $scope.stateUser_id)
                     .then(res => {
                         $scope.images = res.data;
-                    }).catch(err => console.log(err));
+                    });
+                    // .catch(err => console.log(err));
             }
         });
         
@@ -182,8 +185,8 @@ angular.module('app.users', ['ngFileUpload', 'bootstrapLightbox', 'ui.router', '
         $http.get('/getUserProfileForId/' + $scope.stateUser_id)
             .then(profile => {
                 $scope.publicForId = profile.data.public;
-            })
-            .catch(err => console.log(err));
+            });
+            // .catch(err => console.log(err));
     };
 
     $scope.showPublicForId = function() {

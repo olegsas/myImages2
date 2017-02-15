@@ -48,8 +48,8 @@ angular.module('app.home', ['ngFileUpload'])
             users.data.forEach(users => {
                 $scope.users.push(users)
             });
-        })
-        .catch(err => console.log(err));
+        });
+        // .catch(err => console.log(err));
     } else {
         if(adminJwt()){ 
             $http.get('/users/admin')
@@ -57,8 +57,8 @@ angular.module('app.home', ['ngFileUpload'])
                     users.data.forEach(users => {
                         $scope.users.push(users)
                     });
-                })
-                .catch(err => console.log(err));
+                });
+                // .catch(err => console.log(err));
             $http.get('/getIdFromSession')
                 .then(id => {
                     $rootScope.userId = id.data.id;
@@ -69,16 +69,16 @@ angular.module('app.home', ['ngFileUpload'])
                     users.data.forEach(users => {
                         $scope.users.push(users)
                     });
-                })
-                .catch(err => console.log(err));
+                });
+                // .catch(err => console.log(err));
             // we has the user if he is private
             $http.get('/users/anonim')
         .then(users => {
             users.data.forEach(users => {
                 $scope.users.push(users)
             });
-        })
-        .catch(err => console.log(err));
+        });
+        // .catch(err => console.log(err));
 
         $http.get('/getIdFromSession')
                 .then(id => {

@@ -30,8 +30,8 @@ angular.module('app.checkbox', ['ngFileUpload', 'bootstrapLightbox', 'ui.router'
             // images.data.forEach(img => {
             //     $scope.images.push({url: img})
             // })
-        })
-        .catch(err => console.log(err));
+        });
+        // .catch(err => console.log(err));
 // I borrowed the code above the line from the controller home.js
         
         $http.get('/getUserName')
