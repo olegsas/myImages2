@@ -1,0 +1,39 @@
+{
+  "name": "my_pictures",
+  "version": "1.0.0",
+  "description": "my_pictures",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd client && bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olegsas/myImages2.git"
+  },
+  "author": "Oleg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olegsas/myImages2/issues"
+  },
+  "homepage": "https://github.com/olegsas/myImages2#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cloudinary": "^1.7.0",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "^1.4.3",
+    "crypto": "0.0.3",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.8.2",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.3.2",
+    "session": "^0.1.0"
+  }
+}
