@@ -1,6 +1,6 @@
 angular.module('app.auth', ['angular-jwt'])
 
-.factory('AuthService', function ($http, $rootScope) {
+.factory('AuthService', function ($http, $rootScope, $state) {
     const auth = {};
 
     auth.register = async function (email, name, password) {
@@ -22,9 +22,11 @@ angular.module('app.auth', ['angular-jwt'])
         window.localStorage['jwt'] = angular.toJson(res.data.token);
     } catch(e) {
             $rootScope.alert = e.data.message;
+            $state.transitionTo('login');
+            $state.transitionTo('users');
+            $state.transitionTo('login');
         }
 
-        // window.localStorage['jwt'] = angular.toJson(res.data.token)
     }
 
     auth.isAuthenticated = function () {
@@ -53,14 +55,21 @@ angular.module('app.auth', ['angular-jwt'])
         await AuthService.login($scope.username, $scope.password);
         if(nameJwt()) {
             $rootScope.profName = 'Profile ' + nameJwt();
-        };
+            $state.transitionTo('home');
+    };
         $rootScope.name = nameJwt();
-        $state.transitionTo('home')
+        
         
     }
 
     $scope.register = async function() {
         await AuthService.register($scope.email, $scope.username, $scope.password);
         $state.transitionTo('home')
+    }
+
+    $rootScope.alertF = function() {
+        console.log("!!$rootScope.alert = " + !!$rootScope.alert)
+        return !!$rootScope.alert;
+
     }
 })

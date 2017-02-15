@@ -75,6 +75,7 @@ angular.module('app', [
         $rootScope.profName = '';
         $rootScope.name = '';
         $rootScope.userId = '';
+        $rootScope.alert = '';
         $state.transitionTo('login')
     }
 
