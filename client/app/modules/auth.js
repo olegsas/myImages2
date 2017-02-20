@@ -13,9 +13,10 @@ angular.module('app.auth', ['angular-jwt'])
             window.localStorage['jwt'] = angular.toJson(res.data.token)
         } catch(e){
             $rootScope.regmessage = 'This e-mail is already taken';
-            $state.transitionTo('register');
-            $state.transitionTo('users');
-            $state.transitionTo('register');
+            // $state.transitionTo('register');
+            // $state.transitionTo('users');
+            // $state.transitionTo('register');
+            $state.reload('register') ;
         }
     }
 
@@ -29,9 +30,10 @@ angular.module('app.auth', ['angular-jwt'])
         window.localStorage['jwt'] = angular.toJson(res.data.token);
     } catch(e) {
             $rootScope.alert = e.data.message;
-            $state.transitionTo('login');
-            $state.transitionTo('users');
-            $state.transitionTo('login');
+            // $state.transitionTo('login');
+            // $state.transitionTo('users');
+            // $state.transitionTo('login');
+            $state.reload('login') ;
         }
 
     }
